@@ -1,0 +1,24 @@
+@import '~antd/es/style/themes/variable.less';
+@import (reference) '../../../styles/variables.less';
+
+.@{prefix}-date-picker-custom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #f7f8fa;
+  &-time {
+    margin: 0px 20px;
+    padding: 5px 10px;
+    background-color: #edf0f3;
+    border-radius: 10px;
+
+    &-active {
+      background-color: @white;
+      border: 1px solid #e7e7e7;
+    }
+  }
+}
+

@@ -1,0 +1,66 @@
+import moment from 'moment';
+import * as React from 'react';
+import { DatetimePicker } from 'react-vant';
+import { PickerDateSwitchProps } from '..';
+import { date, formatYYYYMMDDCN } from '../const';
+import ColumnsTop from './ColumnsTop/index';
+import DialogAlert from './DialogAlert';
+import Title from './Title';
+
+const dateFomat = (val: moment.MomentInput) => {
+  return formatYYYYMMDDCN(val);
+};
+
+const PickerDate = ({
+  onConfirm,
+  onCancel,
+  setType,
+  subTitle,
+  setChangeValue,
+  changeValue,
+  value,
+  setValue,
+  disabledToday,
+}: PickerDateSwitchProps) => {
+  const onConfirmDatetimePicker = (val: any) => {
+    const limit = disabledToday
+      ? moment(date.yesterday).valueOf()
+      : moment(date.today).valueOf();
+    if (moment(val).valueOf() > limit) {
+      DialogAlert('选择时间不能大于当前时间');
+      return;
+    }
+    const startDate = moment(val);
+    const endDate = moment(val);
+    const parma = {
+      dates: [startDate, endDate],
+    };
+
+    onConfirm(dateFomat(val), parma);
+  };
+  return (
+    <DatetimePicker
+      type="date"
+      minDate={date.minDate}
+      maxDate={date.maxDate}
+      value={value}
+      title={<Title subTitle={subTitle} />}
+      onChange={(val: any) => {
+        setChangeValue(dateFomat(val));
+        if (setValue) setValue(val);
+      }}
+      onCancel={onCancel}
+      onConfirm={onConfirmDatetimePicker}
+      columnsTop={
+        <ColumnsTop
+          type="date"
+          changeValue={changeValue}
+          setType={setType}
+          setChangeValue={setChangeValue}
+        />
+      }
+    />
+  );
+};
+
+export default PickerDate;

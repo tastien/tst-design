@@ -1,0 +1,56 @@
+@import (reference) '../styles/variables.less';
+
+.@{prefix}-date-picker {
+  &-field-box {
+    display: flex;
+    align-items: center;
+    background-color: #f3f4f5;
+  }
+
+  &-right-icon {
+    text-align: right;
+
+    span {
+      color: #999;
+    }
+  }
+}
+
+.@{prefix} {
+  &-flex {
+    display: flex;
+    align-items: center;
+  }
+
+  &-w-full {
+    width: 100%;
+  }
+
+  &-fixed {
+    position: fixed;
+  }
+
+  &-bottom-10 {
+    bottom: 2.5rem;
+  }
+
+  &-px-4 {
+    padding: 0 1rem;
+  }
+
+  &-h-10 {
+    height: 2.5rem;
+  }
+
+  &-rounded-3xl {
+    border-radius: 1.5rem;
+  }
+
+  &-mr-3 {
+    margin-right: 0.75rem;
+  }
+
+  &-z-10 {
+    z-index: 10;
+  }
+}

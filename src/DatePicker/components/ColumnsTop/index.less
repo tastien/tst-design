@@ -1,0 +1,32 @@
+@import '~antd/es/style/themes/variable.less';
+@import (reference) '../../../styles/variables.less';
+
+.@{prefix}-date-picker-columns-top {
+  margin: 15px 0;
+
+  &-radio {
+    padding: 0 12px;
+
+    &-box {
+      background-color: #f3f4f5;
+      border-radius: 6px;
+
+      &-item {
+        padding: 8px 0;
+        text-align: center;
+
+        &-active {
+          width: 98%;
+          height: 90%;
+          background-color: @white;
+        }
+      }
+    }
+  }
+
+  &-time {
+    padding: 15px 30px;
+    text-align: center;
+    border-bottom: 1px solid #f7f8fa;
+  }
+}

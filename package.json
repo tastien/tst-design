@@ -1,0 +1,96 @@
+{
+  "name": "tstd",
+  "version": "0.0.0",
+  "description": "为塔斯汀信息部定制的组件库",
+  "license": "MIT",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "father build",
+    "build:watch": "father dev",
+    "deploy": "gh-pages -d docs-dist",
+    "dev": "dumi dev",
+    "docs:build": "dumi build",
+    "doctor": "father doctor",
+    "lint": "npm run lint:es && npm run lint:css",
+    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
+    "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "prepare": "husky install && dumi setup",
+    "prepublishOnly": "father doctor && npm run build",
+    "start": "npm run dev"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
+  },
+  "lint-staged": {
+    "*.{md,json}": [
+      "prettier --write --no-error-on-unmatched-pattern"
+    ],
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --parser=typescript --write"
+    ]
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.0.1",
+    "@shihengtech/hooks": "^0.0.16",
+    "antd": "^4.23.5",
+    "antd-colorpicker": "^1.0.0",
+    "braft-editor": "^2.3.9",
+    "braft-utils": "^3.0.12",
+    "classnames": "^2.3.2",
+    "eventemitter3": "^5.0.0",
+    "immutability-helper": "^3.1.1",
+    "lodash": "^4.17.21",
+    "moment": "~2.24.0",
+    "prop-types": "^15.8.1",
+    "qs": "^6.11.0",
+    "react-amap": "^1.2.8",
+    "react-color": "^2.19.3",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-vant": "^3.1.4",
+    "tinycolor2": "^1.5.2"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.20.13",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@types/jest": "^29.4.0",
+    "@types/lodash": "^4.14.191",
+    "@types/qs": "^6.9.7",
+    "@types/react-color": "^3.0.6",
+    "@types/tinycolor2": "^1.4.3",
+    "@umijs/lint": "^4.0.0",
+    "babel-plugin-import": "^1.13.6",
+    "dumi": "^2.0.2",
+    "eslint": "^8.23.0",
+    "father": "^4.1.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^3.0.0",
+    "prettier-plugin-packagejson": "^2.2.18",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "stylelint": "^14.9.1"
+  },
+  "peerDependencies": {
+    "react": ">=16.9.0",
+    "react-dom": ">=16.9.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "authors": []
+}

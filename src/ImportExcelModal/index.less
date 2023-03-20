@@ -1,0 +1,105 @@
+@import (reference) '../styles/variables.less';
+
+.@{prefix}-import-excel-modal {
+  &-input {
+    flex: 1;
+    width: auto;
+    max-width: 100%;
+    margin-left: 5px;
+    &-before {
+      position: absolute;
+      left: 3px;
+      top: 9px;
+      z-index: 100;
+      width: 22px;
+      background: transparent;
+    }
+    .ant-input-wrapper {
+      position: relative;
+      .ant-input {
+        width: 100%;
+        padding-left: 18px;
+        text-overflow: ellipsis;
+      }
+      .ant-input-suffix {
+        z-index: 1;
+        right: 10px;
+        position: absolute;
+        display: none;
+        background: #fff;
+        cursor: pointer;
+      }
+      &:hover .ant-input-suffix {
+        display: block;
+      }
+    }
+    .ant-input-group-addon {
+      padding: 0;
+      border: none;
+    }
+    .ant-upload {
+      margin-left: -1px;
+    }
+  }
+  &-download-template {
+    margin-top: 10px;
+    display: inline-block;
+    &-icon {
+      margin-right: 8px;
+    }
+  }
+
+  &-footer {
+    border-top: 1px solid #f0f0f0;
+    padding: 10px 16px;
+    margin-top: 24px;
+  }
+  &-red {
+    color: #f5222d;
+  }
+  
+  &-spin {
+    margin-right: 10px;
+  }
+  
+  &-fail,
+  &-warning,
+  &-success {
+    margin-right: 10px;
+    font-size: 30px;
+  }
+  
+  &-fail {
+    color: #f5222d;
+  }
+  
+  &-warning {
+    color: #fadb14;
+  }
+  
+  &-success {
+    color: #52c41a;
+  }
+  
+  &-download {
+    margin-top: 8px;
+    margin-left: 40px;
+  }
+  
+  
+  &-flex {
+    display: flex;
+  }
+  
+  &-flex_column {
+    flex-direction: column;
+  }
+  
+  &-align_middle {
+    align-items: center;
+  }
+  
+  &-justify_end {
+    justify-content: flex-end;
+  }
+}
