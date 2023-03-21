@@ -84,7 +84,7 @@ const Colorpicker: FC<Props> = ({
     width: '100px',
   },
   // popoverProps = {},
-  picker = 'SketchPicker',
+  picker = 'ChromePicker',
   ...props
 }) => {
   const formatColor = (color?: AnyColorFormat) => {
