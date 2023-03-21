@@ -12,8 +12,8 @@ group:
 ### 基本用法
 
 ```tsx
+import { MultipleOptionItem } from '@tastien/tstd';
 import { Form } from 'antd';
-import { MultipleOptionItem } from 'tstd';
 
 const onFinish = (values: any) => {
   const params = {

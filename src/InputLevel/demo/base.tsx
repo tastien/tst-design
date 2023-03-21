@@ -1,6 +1,6 @@
+import { InputLevel } from '@tastien/tstd';
 import { Form } from 'antd';
 import React from 'react';
-import { InputLevel } from 'tstd';
 
 const App = () => {
   const [form] = Form.useForm();

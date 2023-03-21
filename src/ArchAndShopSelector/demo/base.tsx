@@ -1,5 +1,5 @@
+import { ArchAndShopSelector, ArchNode } from '@tastien/tstd';
 import React from 'react';
-import { ArchAndShopSelector, ArchNode } from 'tstd';
 
 const App = () => {
   const data: ArchNode[] = [];

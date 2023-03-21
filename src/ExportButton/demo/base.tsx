@@ -1,5 +1,5 @@
+import { ExportButton } from '@tastien/tstd';
 import React from 'react';
-import { ExportButton } from 'tstd';
 
 const App: React.FC = () => {
   const request = () => {

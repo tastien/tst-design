@@ -1,5 +1,5 @@
+import { Uploader } from '@tastien/tstd';
 import React from 'react';
-import { Uploader } from 'tstd';
 const { FileUpload } = Uploader;
 
 const App: React.FC = () => {

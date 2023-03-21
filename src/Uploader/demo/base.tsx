@@ -1,5 +1,5 @@
+import { Uploader } from '@tastien/tstd';
 import React, { useState } from 'react';
-import { Uploader } from 'tstd';
 
 const App: React.FC = () => {
   const [uploading, setUploading] = useState(false);

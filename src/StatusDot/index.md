@@ -12,8 +12,8 @@ group:
 ### 基本用法
 
 ```tsx
+import { StatusDot } from '@tastien/tstd';
 import React from 'react';
-import { StatusDot } from 'tstd';
 
 const App = () => (
   <>

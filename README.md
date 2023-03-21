@@ -7,5 +7,5 @@
 ## 📦 Install
 
 ```
-npm i @tstd --save
+npm i @tastien/@tastien/tstd --save
 ```

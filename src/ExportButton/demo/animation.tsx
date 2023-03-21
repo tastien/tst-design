@@ -1,6 +1,6 @@
+import { ExportButton } from '@tastien/tstd';
 import { Card, Layout, Table } from 'antd';
 import React from 'react';
-import { ExportButton } from 'tstd';
 const { ExportPageEntery } = ExportButton;
 
 const { Header, Content, Footer, Sider } = Layout;

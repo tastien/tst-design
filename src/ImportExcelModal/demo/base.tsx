@@ -1,6 +1,6 @@
+import { ImportExcelModal } from '@tastien/tstd';
 import { Button } from 'antd';
 import React from 'react';
-import { ImportExcelModal } from 'tstd';
 
 const App: React.FC = () => {
   const [visible, setVisible] = React.useState(false);

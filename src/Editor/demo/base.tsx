@@ -1,6 +1,6 @@
+import { Editor } from '@tastien/tstd';
 import { Button, Form } from 'antd';
 import React from 'react';
-import { Editor } from 'tstd';
 
 const App: React.FC = () => {
   const [form] = Form.useForm();

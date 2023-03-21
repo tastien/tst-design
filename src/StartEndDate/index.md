@@ -12,8 +12,8 @@ group:
 ### 基本用法
 
 ```tsx
+import { StartEndDate } from '@tastien/tstd';
 import React from 'react';
-import { StartEndDate } from 'tstd';
 
 const App: React.FC = () => {
   const startTime = new Date().getTime();

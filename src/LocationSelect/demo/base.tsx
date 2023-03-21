@@ -1,6 +1,6 @@
+import { LocationSelect } from '@tastien/tstd';
 import { Form } from 'antd';
 import React from 'react';
-import { LocationSelect } from 'tstd';
 
 const App: React.FC = () => {
   const [form] = Form.useForm();

@@ -1,6 +1,6 @@
+import { ColorPickerValue, PickerColor } from '@tastien/tstd';
 import { Button, Form } from 'antd';
 import React from 'react';
-import { ColorPickerValue, PickerColor } from 'tstd';
 
 const App = () => {
   const initialValues = { color: { r: 26, g: 14, b: 85, a: 1 } };

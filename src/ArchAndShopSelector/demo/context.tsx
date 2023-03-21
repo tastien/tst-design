@@ -1,5 +1,5 @@
+import { ArchAndShopSelector, ArchDataProvider } from '@tastien/tstd';
 import React from 'react';
-import { ArchAndShopSelector, ArchDataProvider } from 'tstd';
 
 const Child = () => {
   return <ArchAndShopSelector controlMode="BOTH" />;

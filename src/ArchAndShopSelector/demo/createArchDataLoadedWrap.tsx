@@ -1,9 +1,9 @@
-import React from 'react';
 import {
   ArchAndShopSelector,
   ArchDataProvider,
   createArchDataLoadedWrap,
-} from 'tstd';
+} from '@tastien/tstd';
+import React from 'react';
 
 const Child = createArchDataLoadedWrap(() => {
   return <ArchAndShopSelector controlMode="BOTH" />;

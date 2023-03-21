@@ -12,8 +12,8 @@ group:
 ## 基本用法
 
 ```tsx
+import { DatePicker } from '@tastien/tstd';
 import React from 'react';
-import { DatePicker } from 'tstd';
 
 const App = () => (
   <DatePicker
@@ -28,8 +28,8 @@ export default App;
 ## 开启营业、自然日切换
 
 ```tsx
+import { DatePicker } from '@tastien/tstd';
 import React from 'react';
-import { DatePicker } from 'tstd';
 
 const App = () => (
   <DatePicker
@@ -47,8 +47,8 @@ export default App;
 ## 动态配置可选日期类型
 
 ```tsx
+import { DatePicker } from '@tastien/tstd';
 import React from 'react';
-import { DatePicker } from 'tstd';
 
 const App = () => (
   <DatePicker
@@ -64,9 +64,9 @@ export default App;
 ## 快速切换日期按钮
 
 ```tsx
+import { DatePicker } from '@tastien/tstd';
 import moment from 'moment';
 import React, { useState } from 'react';
-import { DatePicker } from 'tstd';
 
 const App = () => {
   const [dates, setDates] = useState([moment(), moment()]);

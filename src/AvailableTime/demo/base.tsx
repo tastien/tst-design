@@ -1,6 +1,6 @@
+import { AvailableTime } from '@tastien/tstd';
 import { Button, Form } from 'antd';
 import React from 'react';
-import { AvailableTime } from 'tstd';
 
 const App: React.FC = () => {
   const [form] = Form.useForm();

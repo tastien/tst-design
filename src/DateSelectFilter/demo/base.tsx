@@ -1,5 +1,5 @@
+import { DateSelectFilter } from '@tastien/tstd';
 import React from 'react';
-import { DateSelectFilter } from 'tstd';
 
 const App = () => (
   <DateSelectFilter
