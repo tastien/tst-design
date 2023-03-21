@@ -24,12 +24,12 @@ const dateType2Other = {
   },
 };
 
-interface QuickButtonProps {
+type QuickButtonProps = {
   dates: Moment[];
   dateType: DateType;
   onChange: (value: Moment[]) => void;
   disabledToday: boolean;
-}
+};
 
 const limit = (type: DateType, disabledToday?: boolean) => {
   if (type === 'date') {

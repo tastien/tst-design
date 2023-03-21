@@ -27,15 +27,6 @@ export type DatePickerIndexProps = {
   };
 };
 
-export const Context = React.createContext<{
-  pickDateType: DateType[];
-  disabledToday: boolean;
-}>({
-  pickDateType: [],
-  disabledToday: false,
-});
-
-const ContextProvider = Context.Provider;
 export interface PickerDateSwitchProps {
   onCancel: () => void;
   onConfirm: (file: any, parma: any) => void;
@@ -48,6 +39,20 @@ export interface PickerDateSwitchProps {
   setValue?: React.Dispatch<React.SetStateAction<any>>;
 }
 
+type CompoundedComponent = DatePickerIndexProps & {
+  QuickButton?: typeof QuickButton;
+};
+
+export const Context = React.createContext<{
+  pickDateType: DateType[];
+  disabledToday: boolean;
+}>({
+  pickDateType: [],
+  disabledToday: false,
+});
+
+const ContextProvider = Context.Provider;
+
 const DatePickerIndex = ({
   onChange,
   onType,
@@ -59,7 +64,7 @@ const DatePickerIndex = ({
   subTitle,
   disabledToday = false,
   quickSwitchButton,
-}: DatePickerIndexProps) => {
+}: CompoundedComponent) => {
   const [dateType, setDateType] = React.useState<DateType>('date');
   const defaultDateValue = disabledToday ? date.yesterday : date.today;
   const defaultMonthValue = disabledToday ? date.lastMonthsVal : date.today;
@@ -155,7 +160,7 @@ const DatePickerIndex = ({
             />
           )}
           <Field
-            readonly
+            readOnly
             clickable
             value={fieldValue}
             placeholder="选择选择日期"
