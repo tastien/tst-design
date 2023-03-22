@@ -1,7 +1,7 @@
 ---
 nav:
   path: /components
-title: multipleOptionItem 选择输入联动
+title: MultipleOptionItem 选择输入联动
 group:
   title: 数据录入
   order: 4
