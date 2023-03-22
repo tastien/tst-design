@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_tastien_tstd=self.webpackChunk_tastien_tstd||[]).push([[935],{2511:function(i,e,_){_.r(e);var u=_(71100),o=_(35532),m=_(80543),E=_(39047),l=_(4046),r=_(67915),n=_(14570),a=_(67294),t=_(85893);function s(){var d=(0,n.eL)(),M=d.texts;return(0,t.jsx)(n.dY,{children:(0,t.jsx)(t.Fragment,{})})}e.default=s}}]);
