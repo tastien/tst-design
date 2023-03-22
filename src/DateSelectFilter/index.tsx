@@ -63,11 +63,13 @@ const DateSelectFilter = React.forwardRef<
     }));
 
     const handleDatePickerChange = (values: moment.Moment[]) => {
-      onChange!(
-        values,
-        values.map((m) => m.format('YYYY-MM-DD')),
-        dateType,
-      );
+      if (onChange) {
+        onChange!(
+          values,
+          values.map((m) => m.format('YYYY-MM-DD')),
+          dateType,
+        );
+      }
     };
 
     if (type === 'quick') {
