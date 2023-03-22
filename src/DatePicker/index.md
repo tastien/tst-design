@@ -61,29 +61,6 @@ const App = () => (
 export default App;
 ```
 
-## 快速切换日期按钮
-
-```tsx
-import { DatePicker } from '@tastien/tstd';
-import moment from 'moment';
-import React, { useState } from 'react';
-
-const App = () => {
-  const [dates, setDates] = useState([moment(), moment()]);
-  return (
-    <DatePicker
-      onChange={(value) => console.log(value)}
-      onType={(value) => console.log(value)}
-      quickSwitchButton={{
-        dates,
-      }}
-    />
-  );
-};
-
-export default App;
-```
-
 ## API
 
 | 参数              | 说明                                         | 类型                     | 默认值                 |
