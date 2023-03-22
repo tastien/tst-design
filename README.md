@@ -2,7 +2,7 @@
 
 ## Docs
 
-[传送门]
+[传送门](https://tastien.github.io/tst-design/)
 
 ## 📦 Install
 
