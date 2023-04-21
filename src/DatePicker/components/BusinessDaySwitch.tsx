@@ -21,7 +21,7 @@ const BusinessDaySwitch = ({
   return (
     <>
       <Field
-        readOnly
+        readonly
         clickable
         value={dateType}
         style={{ width: 120 }}

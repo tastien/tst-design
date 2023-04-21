@@ -160,7 +160,7 @@ const DatePickerIndex = ({
             />
           )}
           <Field
-            readOnly
+            readonly
             clickable
             value={fieldValue}
             placeholder="选择选择日期"
