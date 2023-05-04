@@ -1,6 +1,6 @@
 {
   "name": "@tastien/tstd",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "为塔斯汀信息部定制的组件库",
   "license": "MIT",
   "module": "dist/index.js",
