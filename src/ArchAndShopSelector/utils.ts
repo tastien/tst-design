@@ -8,7 +8,7 @@ import {
 
 export const getIds = (list: ShopNode[]) => list.map((shop) => shop.id);
 
-// 转换组织结构数据为Map
+/** 转换组织结构数据为Map */
 export const convertArchMap = (data: ArchNode | ArchNode[]) => {
   const map: Record<number, ArchNode> = {};
   const dig = (data?: ArchNode[]) =>
@@ -23,7 +23,7 @@ export const convertArchMap = (data: ArchNode | ArchNode[]) => {
   return map;
 };
 
-// 转换门店数据为Map
+/** 转换门店数据为Map */
 export const convertShopMap = (data: ShopNode[]) => {
   const map: Record<number, ShopNode> = {};
   data.forEach((shop) => (map[shop.id] = shop));
@@ -31,7 +31,7 @@ export const convertShopMap = (data: ShopNode[]) => {
   return map;
 };
 
-// 从组织机构中获取门店数据
+/** 从组织机构中获取门店数据 */
 export const getShopListFromArch = (data: ArchNode | ArchNode[]) => {
   const list: ShopNode[] = [];
   if (!data) return list;
@@ -47,12 +47,12 @@ export const getShopListFromArch = (data: ArchNode | ArchNode[]) => {
   return list;
 };
 
-// 获取数组最后一个元素
+/** 获取数组最后一个元素 */
 export const getLastValue = <T = any>(array: T[]) => {
   return array[array.length - 1];
 };
 
-// 通过组织机构id获取对应的全部门店
+/** 通过组织机构id获取对应的全部门店 */
 export const getShopListByArchIds = (
   archIds: number[] | undefined,
   archMap: Record<number, ArchNode>,
@@ -64,7 +64,7 @@ export const getShopListByArchIds = (
   return getShopListFromArch(archNode);
 };
 
-// 将门店数据转换成以城市分组的树形结构
+/** 将门店数据转换成以城市分组的树形结构  */
 export const convertShopTree = (data: ShopNode[]) => {
   if (!data.length) return [];
 
@@ -89,7 +89,7 @@ export const convertShopTree = (data: ShopNode[]) => {
   ];
 };
 
-// 通过树形组件的value获取shopIds
+/** 通过树形组件的value获取shopIds */
 export const getShopIdsFromTreeValue = (
   treeValue: ('all' | string | number)[] | undefined,
   cityGroup: Record<string, ShopNode[]>,
@@ -116,7 +116,7 @@ export const getShopIdsFromTreeValue = (
   return Array.from(new Set(shopIds));
 };
 
-// 通过shopId获取树形组件的value
+/** 通过shopId获取树形组件的value */
 export const getTreeValueFromShopIds = (
   shopIds: number[] | undefined,
   cityGroup: Record<string, ShopNode[]>,
@@ -157,7 +157,7 @@ export const getTreeValueFromShopIds = (
   return treeValue;
 };
 
-// 初始化value的逻辑
+/** 初始化value的逻辑 */
 export const initializeArchAndShopValue = (
   props: ArchAndShopSelectorProps,
   archList: ArchNode[],

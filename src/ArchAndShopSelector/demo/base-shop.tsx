@@ -1,16 +1,23 @@
 import { ArchAndShopSelector, ArchNode } from '@tastien/tstd';
-import React from 'react';
+import React, { useState } from 'react';
+import { makeArch, makeShops } from '../mock';
+
+const data: ArchNode[] = [
+  makeArch(0, makeShops(10), [
+    makeArch(1, makeShops(10, '上海', 10)),
+    makeArch(2, makeShops(10, '北京', 20)),
+    makeArch(3, makeShops(10, '北京', 30)),
+  ]),
+];
 
 const App = () => {
-  const data: ArchNode[] = [];
-  const [shopIds, setShopIds] = React.useState<number[] | undefined>([]);
-
+  const [shopIds, setShopIds] = useState([]);
   return (
     <ArchAndShopSelector
       archList={data}
       controlMode="SHOP"
       value={shopIds}
-      onChange={(val) => setShopIds(val)}
+      onChange={setShopIds}
     />
   );
 };

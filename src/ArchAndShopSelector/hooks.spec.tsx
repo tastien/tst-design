@@ -125,6 +125,20 @@ describe('ArchAndShopSelector Hooks', () => {
       expect(result.current.shopIds).toEqual(shopIds);
       expect(onChange).toBeCalledWith(setShopIds);
     });
+
+    it('BOTH模式下Value为undefined，应该正常渲染', () => {
+      const onChange = jest.fn();
+      const { result } = renderHook(useArchAndShop, {
+        initialProps: {
+          archList: rawData,
+          value: undefined,
+          controlMode: 'BOTH',
+          onChange,
+        },
+      });
+
+      expect(result.current.shopIds).toEqual(undefined);
+    });
   });
 
   describe('>>> useDoubleValue', () => {

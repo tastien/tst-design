@@ -17,21 +17,23 @@ group:
 
 ## 基本用法
 
-## value 值 受控
-
-value 值受控有两种模式，一种是只控制门店值，一种是同时受控门店和组织。
-
-### SHOP 模式
-
-shop 模式下， controlMode 传`SHOP`，value 的值类型必须为 `number[] | undefinde`
+`controlMode` 在 `SHOP` 模式下，`value` 和 `onChange` 的数据格式是 `number[]` 格式的门店 id
 
 <code src="./demo/base-shop"></code>
 
-### BOTH 模式
-
-shop 模式下， controlMode 传`BOTH`，value 的值类型必须为 [`ArchAndShopValue`](##archandshopvalue)
+`controlMode` 在 `BOTH` 模式下，`value` 和 `onChange` 的数据格式是`[number[], number[]]`格式的组织架构 `id` 和门店 `id` 元组
 
 <code src="./demo/base-both"></code>
+
+## 配合 AntdForm 使用
+
+shop 模式下， controlMode 传`SHOP`，返回门店 ID，类型为 `number[] | undefinde`
+
+<code src="./demo/form-shop"></code>
+
+shop 模式下， controlMode 传`BOTH`，返回组织以及门店 ID，类型为 [`ArchAndShopValue`](##archandshopvalue)
+
+<code src="./demo/form-both"></code>
 
 ## 通过 context 传递数据
 
@@ -47,13 +49,28 @@ shop 模式下， controlMode 传`BOTH`，value 的值类型必须为 [`ArchAndS
 
 <code src="./demo/createArchDataLoadedWrap"></code>
 
+## 门店单选
+
+<code src="./demo/single-selector"></code>
+
 ## API
 
-| 参数        | 说明               | 类型                                               | 默认值 |
-| ----------- | ------------------ | -------------------------------------------------- | ------ |
-| onChange    | 改变值后的回调     | (value?: number[]) => void                         | -      |
-| controlMode | value 值的受控模式 | 'SHOP' \| 'BOTH'                                   | -      |
-| value       | 受控值             | number[] \| [ArchAndShopValue](##archandshopvalue) | -      |
+| 参数        | 说明                     | 类型                                               | 默认值 |
+| ----------- | ------------------------ | -------------------------------------------------- | ------ |
+| archList    | 组织和门店的数据列表数据 | ArchNode                                           | -      |
+| onChange    | 改变值后的回调           | (value?: number[]) => void                         | -      |
+| controlMode | value 值的受控模式       | 'SHOP' \| 'BOTH'                                   | -      |
+| value       | 受控值                   | number[] \| [ArchAndShopValue](##archandshopvalue) | -      |
+
+## useArchAndShopDefaultValue
+
+该组件提供的一个 hook，用于获取组织与门店选择的默认值，需要配合配合 createArchDataLoadedWrap 一起使用保证数据已经加载完成，否则默认值会是错误的
+
+- archIds: 所有的组织 ID
+- shopIds：所有的门店 ID
+- archMap: 转换组织结构数据为 Map
+- getShopIdsByArchIds: 一个函数，获取门店 ID 根据组织 ID，返回一个数组
+- allShopList：返回所有门店列表
 
 ## ArchAndShopValue
 

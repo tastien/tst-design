@@ -21,7 +21,6 @@ import {
 const useArchList = (props: ArchAndShopSelectorProps) => {
   const list4Cxt = useContext(ArchDataContext);
   const list4Props = props.archList;
-
   return list4Props || list4Cxt.data || [];
 };
 
@@ -72,13 +71,14 @@ const useMergeValue = (
   value: ArchAndShopValue,
 ): [ArchAndShopValue, { isControlledShop: boolean }] => {
   const isControlledShop = 'value' in props;
+  // const isControlledArch = 'archValue' in props;
 
   const [innerArchIds, innerShopIds] = value;
   let result: ArchAndShopValue = value;
   if (props.controlMode === undefined || props.controlMode === 'SHOP') {
     result = [innerArchIds, isControlledShop ? props.value : innerShopIds];
   } else if (props.controlMode === 'BOTH') {
-    result = isControlledShop ? props.value! : value;
+    result = isControlledShop ? props.value || [value[0], undefined] : value;
   }
 
   return [
@@ -93,8 +93,8 @@ export const useDoubleValue = <T>(v: T | [T, T]): [T, T] => {
   return Array.isArray(v) ? v : [v, v];
 };
 
+/** 选择器核心的数据处理逻辑 */
 export const useArchAndShopCore = (props: ArchAndShopSelectorProps) => {
-  /** 选择器核心的数据处理逻辑 */
   const archList = useArchList(props);
   const archMap = useArchMap(archList);
   const allShopList = useAllShopList(archList);
@@ -111,10 +111,9 @@ export const useArchAndShopCore = (props: ArchAndShopSelectorProps) => {
   const shopList = useCurrentShopList(archIds, archMap, allShopList);
 
   const emitChangedValue = (newValue: ArchAndShopValue) => {
+    const [_, shopIds] = newValue; // eslint-disable-line
     if (isControlledShop) {
       if (props.controlMode === undefined || props.controlMode === 'SHOP') {
-        const [_, shopIds] = newValue;
-        console.log(_, '_');
         props.onChange?.(shopIds);
       } else if (props.controlMode === 'BOTH') {
         props.onChange?.(newValue);
@@ -135,8 +134,8 @@ export const useArchAndShopCore = (props: ArchAndShopSelectorProps) => {
   };
 };
 
+/** 封装了选择器多选版本逻辑的hook */
 export const useArchAndShop = (props: ArchAndShopSelectorProps) => {
-  /** 封装了选择器多选版本逻辑的hook */
   const {
     archList,
     archMap,
@@ -182,8 +181,8 @@ export const useArchAndShop = (props: ArchAndShopSelectorProps) => {
   };
 };
 
+/** 封装了选择器单选版本逻辑的hook */
 export const useArchAndShopSingle = (props: ArchAndShopSelectorProps) => {
-  // 封装了选择器单选版本逻辑的hook
   const {
     archList,
     archMap,

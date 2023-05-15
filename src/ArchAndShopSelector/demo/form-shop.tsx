@@ -1,5 +1,7 @@
 import { ArchAndShopSelector, ArchNode } from '@tastien/tstd';
-import React, { useState } from 'react';
+import { Form } from 'antd';
+import { useForm } from 'antd/lib/form/Form';
+import React from 'react';
 import { makeArch, makeShops } from '../mock';
 
 const data: ArchNode[] = [
@@ -11,14 +13,14 @@ const data: ArchNode[] = [
 ];
 
 const App = () => {
-  const [archAndShop, setArchAndShop] = useState([[], []]);
+  const [form] = useForm();
+
   return (
-    <ArchAndShopSelector
-      archList={data}
-      controlMode="BOTH"
-      value={archAndShop}
-      onChange={setArchAndShop}
-    />
+    <Form form={form} layout="inline">
+      <Form.Item name="archAndShopIds">
+        <ArchAndShopSelector archList={data} controlMode="SHOP" />
+      </Form.Item>
+    </Form>
   );
 };
 
