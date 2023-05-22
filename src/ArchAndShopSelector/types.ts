@@ -1,3 +1,5 @@
+type TreeWith<T = object> = T & { children?: TreeWith<T>[] };
+
 export type ArchNode = TreeWith<{
   id: number;
   name: string;
