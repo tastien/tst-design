@@ -55,10 +55,12 @@ const defaultFormItemProps = {
 const TimeInterval = React.memo<TimeIntervalProps>(
   ({ supportNextDay, disabled, formItemProps, maxCount = 3 }) => {
     const name = formItemProps?.name || defaultFormItemProps.name;
+
     return (
       <Form.Item
         label={formItemProps?.label || defaultFormItemProps.label}
         required={formItemProps?.required}
+        labelCol={formItemProps?.labelCol}
       >
         <Form.List
           name={name}
@@ -111,34 +113,32 @@ const TimeInterval = React.memo<TimeIntervalProps>(
                   </Form.Item>
                 );
               })}
-              {
-                <Form.Item
-                  noStyle
-                  dependencies={[name]}
-                  wrapperCol={{ span: 12 }}
-                >
-                  {({ getFieldValue }) => {
-                    const times = getFieldValue(name);
-                    return (
-                      (!times || times.length < maxCount) && (
-                        <Form.Item style={formItemProps?.style}>
-                          <Button
-                            type="link"
-                            onClick={() => !disabled && add()}
-                            icon={<PlusOutlined />}
-                            disabled={disabled}
-                          >
-                            {`新增时段（${times?.length || 0}/${maxCount}）`}
-                          </Button>
-                          {formItemProps?.required && (
-                            <Form.ErrorList errors={errors} />
-                          )}
-                        </Form.Item>
-                      )
-                    );
-                  }}
-                </Form.Item>
-              }
+              <Form.Item
+                noStyle
+                dependencies={[name]}
+                wrapperCol={{ span: 12 }}
+              >
+                {({ getFieldValue }) => {
+                  const times = getFieldValue(name);
+                  return (
+                    (!times || times.length < maxCount) && (
+                      <Form.Item style={formItemProps?.style}>
+                        <Button
+                          type="link"
+                          onClick={() => !disabled && add()}
+                          icon={<PlusOutlined />}
+                          disabled={disabled}
+                        >
+                          {`新增时段（${times?.length || 0}/${maxCount}）`}
+                        </Button>
+                        {formItemProps?.required && (
+                          <Form.ErrorList errors={errors} />
+                        )}
+                      </Form.Item>
+                    )
+                  );
+                }}
+              </Form.Item>
             </>
           )}
         </Form.List>
