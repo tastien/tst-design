@@ -37,5 +37,14 @@ export default defineConfig({
         style: true,
       },
     ],
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'react-vant',
+        libraryDirectory: 'es',
+        style: true,
+      },
+      'react-vant',
+    ],
   ],
 });
