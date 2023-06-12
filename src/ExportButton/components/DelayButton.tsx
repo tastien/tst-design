@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { ButtonProps } from 'antd/es/button/button';
 import React, { ReactNode, useState } from 'react';
-import useUpdateEffect from '../../hooks/useUpdateEffect';
+import useUpdateEffect from '../hooks/useUpdateEffect';
 
 export interface DelayButtonProps extends ButtonProps {
   delay?: number; // 单位 s, 一定要大于 1
