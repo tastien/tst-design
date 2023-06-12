@@ -1,58 +1,15 @@
 import { Popover } from 'antd';
-import PropTypes from 'prop-types';
 import React, { CSSProperties } from 'react';
 import * as ReactColor from 'react-color';
 import { Color, ColorResult } from 'react-color';
 import tinycolor from 'tinycolor2';
 
-const getPicker = (pickerType: Props['picker']) => {
-  switch (pickerType) {
-    case 'BlockPicker':
-      return ReactColor.BlockPicker;
-    case 'ChromePicker':
-      return ReactColor.ChromePicker;
-    case 'CirclePicker':
-      return ReactColor.CirclePicker;
-    case 'CompactPicker':
-      return ReactColor.CompactPicker;
-    case 'GithubPicker':
-      return ReactColor.GithubPicker;
-    case 'HuePicker':
-      return ReactColor.HuePicker;
-    case 'MaterialPicker':
-      return ReactColor.MaterialPicker;
-    case 'PhotoshopPicker':
-      return ReactColor.PhotoshopPicker;
-    case 'SliderPicker':
-      return ReactColor.SliderPicker;
-    case 'SwatchesPicker':
-      return ReactColor.SwatchesPicker;
-    case 'TwitterPicker':
-      return ReactColor.TwitterPicker;
-  }
-  return ReactColor.SketchPicker;
-};
 interface HSVColor {
   a?: number | undefined;
   h: number;
   s: number;
   v: number;
 }
-
-export type ColorPickerTypes =
-  | 'BlockPicker'
-  | 'ChromePicker'
-  | 'CirclePicker'
-  | 'CompactPicker'
-  | 'GithubPicker'
-  | 'GooglePicker'
-  | 'HuePicker'
-  | 'MaterialPicker'
-  | 'PhotoshopPicker'
-  | 'SketchPicker'
-  | 'SliderPicker'
-  | 'SwatchesPicker'
-  | 'TwitterPicker';
 
 export type ColorPickerValue = Color | HSVColor;
 export type ColorPickerResult = ColorResult;
@@ -65,16 +22,10 @@ type Props = {
   onChangeComplete?: (value: any) => void;
   onColorResult?: (color: ColorPickerResult) => AnyColorFormat;
   blockStyles?: CSSProperties;
-  picker?: ColorPickerTypes;
-  // popoverProps?: any
   [key: string]: any;
 };
 
-type FC<P> = ((props: P) => JSX.Element) & {
-  propTypes: { [key: string]: any };
-};
-
-const Colorpicker: FC<Props> = ({
+const Colorpicker = ({
   value,
   onChange,
   onChangeComplete,
@@ -83,10 +34,8 @@ const Colorpicker: FC<Props> = ({
   blockStyles = {
     width: '100px',
   },
-  // popoverProps = {},
-  picker = 'ChromePicker',
   ...props
-}) => {
+}: Props) => {
   const formatColor = (color?: AnyColorFormat) => {
     return color !== undefined && typeof color !== 'string'
       ? tinycolor(
@@ -143,40 +92,18 @@ const Colorpicker: FC<Props> = ({
     { background: getBackgroundBlockColor(value) },
   );
 
-  const fixReactColorStyles: { [key in ColorPickerTypes]?: any } = {
-    MaterialPicker: {
-      default: {
-        material: {
-          boxSizing: 'content-box',
-        },
-      },
-    },
-  };
-
-  if (popup) {
-    fixReactColorStyles['SliderPicker'] = {
-      default: {
-        hue: {
-          minWidth: '300px',
-        },
-      },
-    };
-  }
-
-  const Picker = getPicker(picker);
+  const Picker = ReactColor.ChromePicker;
 
   return (
     <>
       {popup ? (
         <Popover
           trigger="click"
-          // {...popoverProps}
           content={
             <Picker
               color={prepareValue(value)}
               onChange={triggerOnChange}
               onChangeComplete={triggerOnChangeComplete}
-              styles={fixReactColorStyles[picker] || undefined}
               {...props}
             />
           }
@@ -188,37 +115,11 @@ const Colorpicker: FC<Props> = ({
           color={prepareValue(value)}
           onChange={triggerOnChange}
           onChangeComplete={triggerOnChangeComplete}
-          styles={fixReactColorStyles[picker] || undefined}
           {...props}
         />
       )}
     </>
   );
-};
-
-Colorpicker.propTypes = {
-  popup: PropTypes.bool,
-  value: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  onChange: PropTypes.func,
-  onChangeComplete: PropTypes.func,
-  onColorResult: PropTypes.func,
-  blockStyles: PropTypes.object,
-  // popoverProps: PropTypes.object,
-  picker: PropTypes.oneOf([
-    'BlockPicker',
-    'ChromePicker',
-    'CirclePicker',
-    'CompactPicker',
-    'GithubPicker',
-    'GooglePicker',
-    'HuePicker',
-    'MaterialPicker',
-    'PhotoshopPicker',
-    'SketchPicker',
-    'SliderPicker',
-    'SwatchesPicker',
-    'TwitterPicker',
-  ]),
 };
 
 export default Colorpicker;
