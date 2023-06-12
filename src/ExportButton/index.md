@@ -13,10 +13,6 @@ group:
 
 <code src="./demo/base.tsx"></code>
 
-### 添加动效
-
-<code src="./demo/animation.tsx"></code>
-
 ## API
 
 ### ExportButton

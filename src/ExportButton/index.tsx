@@ -24,7 +24,6 @@ const ExportButton = ({
   onSuccess,
   successMessage = '报表导出成功，可前往我的导出查看。',
   icon = <DownloadOutlined />,
-  animation = true,
   children,
   ...rest
 }: CompoundedComponent) => {
@@ -36,7 +35,7 @@ const ExportButton = ({
     {
       onSuccess: (e) => {
         if (onSuccess) onSuccess(e);
-        if (animation) addCount(e);
+        addCount(e);
         message.success(successMessage);
       },
     },
@@ -47,9 +46,7 @@ const ExportButton = ({
       type="primary"
       loading={loading}
       icon={icon}
-      onClick={(e) => {
-        run(e);
-      }}
+      onClick={run}
       {...rest}
     >
       {children}

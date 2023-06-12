@@ -3,6 +3,15 @@ import { ButtonProps } from 'antd/es/button/button';
 import React, { ReactNode, useState } from 'react';
 import useUpdateEffect from '../hooks/useUpdateEffect';
 
+const sleep = (ms: number) =>
+  new Promise((resolve, reject) => {
+    try {
+      setTimeout(resolve, ms);
+    } catch (error) {
+      reject(error);
+    }
+  });
+
 export interface DelayButtonProps extends ButtonProps {
   delay?: number; // 单位 s, 一定要大于 1
   delayRender?(lastTime: number): ReactNode;
@@ -16,7 +25,6 @@ const DelayButton = ({
   ...props
 }: DelayButtonProps) => {
   const [disabledTime, setDisabledTime] = useState(0);
-
   let context;
   if (!!disabledTime) {
     if (!delayRender) {
@@ -30,10 +38,10 @@ const DelayButton = ({
 
   useUpdateEffect(() => {
     if (loading || delay < 1) return;
-
     (async () => {
       for (let i = delay + 1; i--; ) {
         setDisabledTime(i);
+        await sleep(1000);
       }
     })();
   }, [loading]);
