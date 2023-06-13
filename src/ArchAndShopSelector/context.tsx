@@ -19,10 +19,9 @@ export const createArchDataLoadedWrap = (
 ) => {
   return (props: any) => {
     const { isLoading } = useContext(ArchDataContext);
-    return (
-      <Spin spinning={isLoading} delay={300}>
-        <Component {...props} />
-      </Spin>
-    );
+    if (isLoading) {
+      return <Spin spinning={isLoading} delay={300}></Spin>;
+    }
+    return <Component {...props} />;
   };
 };

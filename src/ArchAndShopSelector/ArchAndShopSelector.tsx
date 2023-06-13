@@ -1,5 +1,5 @@
 import { Cascader, Select, Space, TreeSelect } from 'antd';
-import * as React from 'react';
+import React from 'react';
 import { useArchAndShop, useArchAndShopSingle, useDoubleValue } from './hooks';
 import { ArchAndShopSelectorProps } from './types';
 
@@ -8,6 +8,7 @@ export const ArchAndShopSelector = (props: ArchAndShopSelectorProps) => {
   const { archList, archIds, onArchChange, shopTree, treeValue, onShopChange } =
     useArchAndShop(props);
   const [archDisabled, shopDisabled] = useDoubleValue(disabled);
+
   return (
     <Space>
       <Cascader
