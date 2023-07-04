@@ -27,7 +27,6 @@ export const ArchAndShopSelector = (props: ArchAndShopSelectorProps) => {
         treeNodeFilterProp="title"
         showSearch
         treeCheckable
-        autoClearSearchValue={false}
         placeholder="请选择门店"
         showCheckedStrategy="SHOW_PARENT"
         value={treeValue}
