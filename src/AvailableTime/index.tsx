@@ -9,7 +9,7 @@ type AvailableTimeFormItemProps = FormItemProps & {
 interface props {
   maxCount?: number;
   disabled?: boolean;
-  itemMarginBottom?: string;
+  supportNextDay?: boolean;
   formItemProps?: {
     fullTime: AvailableTimeFormItemProps;
     weeks: AvailableTimeFormItemProps;
@@ -31,6 +31,7 @@ const AvailableTime = React.memo<props>(
   ({
     maxCount = 3,
     disabled = false,
+    supportNextDay,
     formItemProps = {
       fullTime: {
         name: 'fullTime',
@@ -76,6 +77,7 @@ const AvailableTime = React.memo<props>(
                   <TimeInterval
                     maxCount={maxCount}
                     disabled={disabled}
+                    supportNextDay={supportNextDay}
                     formItemProps={formItemProps.times}
                   />
                 </>

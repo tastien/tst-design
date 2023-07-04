@@ -17,14 +17,19 @@ group:
 
 <code src="./demo/disabled.tsx"></code>
 
+### 支持次日
+
+<code src="./demo/supportNextDay.tsx"></code>
+
 ### 表单参数修改
 
 <code src="./demo/formItemProps.tsx"></code>
 
 ## API
 
-| 参数          | 说明                                                                                                       | 类型    | 默认值                                                                                                                           |
-| ------------- | ---------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| maxCount      | 当添加 3 个时段不满足需求时使用                                                                            | number  | 3                                                                                                                                |
-| disabled      | 需要禁止选择时使用                                                                                         | boolean | false                                                                                                                            |
-| formItemProps | 是否全时段、周期、时段的表单配置，具体参考[antd.Form.Item](https://ant.design/components/form-cn#formitem) | -       | { fullTime: {name: 'fullTime', label: '可用时间' },weeks: {name: 'weeks',label: "周期" },times: {name: 'times',label: '时段' } } |
+| 参数           | 说明                                                                                                       | 类型    | 默认值                                                                                                                           |
+| -------------- | ---------------------------------------------------------------------------------------------------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| maxCount       | 当添加 3 个时段不满足需求时使用                                                                            | number  | 3                                                                                                                                |
+| disabled       | 需要禁止选择时使用                                                                                         | boolean | false                                                                                                                            |
+| supportNextDay | 是否支持次日                                                                                               | boolean | false                                                                                                                            |
+| formItemProps  | 是否全时段、周期、时段的表单配置，具体参考[antd.Form.Item](https://ant.design/components/form-cn#formitem) | -       | { fullTime: {name: 'fullTime', label: '可用时间' },weeks: {name: 'weeks',label: "周期" },times: {name: 'times',label: '时段' } } |
