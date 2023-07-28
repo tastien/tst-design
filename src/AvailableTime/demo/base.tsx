@@ -10,14 +10,9 @@ const App: React.FC = () => {
   };
 
   return (
-    <Form
-      onFinish={onFinish}
-      form={form}
-      labelCol={{ span: 8 }}
-      wrapperCol={{ span: 16 }}
-    >
+    <Form onFinish={onFinish} form={form}>
       <AvailableTime />
-      <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
+      <Form.Item>
         <Button type="primary" htmlType="submit">
           提交
         </Button>

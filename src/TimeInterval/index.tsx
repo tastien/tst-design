@@ -47,9 +47,7 @@ const CustomTimePicker = (props: {
 };
 
 const defaultFormItemProps = {
-  label: '时段',
   name: 'openTimes',
-  required: false,
 };
 
 const TimeInterval = React.memo<TimeIntervalProps>(
@@ -58,9 +56,10 @@ const TimeInterval = React.memo<TimeIntervalProps>(
 
     return (
       <Form.Item
-        label={formItemProps?.label || defaultFormItemProps.label}
+        label={formItemProps?.label}
         required={formItemProps?.required}
         labelCol={formItemProps?.labelCol}
+        wrapperCol={formItemProps?.wrapperCol}
       >
         <Form.List
           name={name}

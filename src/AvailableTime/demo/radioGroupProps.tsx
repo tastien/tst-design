@@ -19,19 +19,30 @@ const App: React.FC = () => {
       <AvailableTime
         formItemProps={{
           fullTime: {
-            name: 'fullTime',
-            label: '售卖时间',
+            name: 'date',
+            label: '营业时间',
           },
           weeks: {
-            name: 'saleWeeks',
+            name: 'wwek',
             wrapperCol: { offset: 8 },
           },
           times: {
-            name: 'saleTimes',
-            required: true,
+            name: 'time',
             wrapperCol: { offset: 8 },
-            rules: [{ required: true, message: '请选择售卖时段' }],
+            required: true,
           },
+        }}
+        radioGroupProps={{
+          options: [
+            {
+              label: '与门店营业时间保持一致',
+              value: true,
+            },
+            {
+              label: '单独设置外卖营业时间',
+              value: false,
+            },
+          ],
         }}
       />
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

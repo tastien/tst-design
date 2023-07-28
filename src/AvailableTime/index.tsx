@@ -1,4 +1,4 @@
-import { Checkbox, Form, FormItemProps, Radio } from 'antd';
+import { Checkbox, Form, FormItemProps, Radio, RadioGroupProps } from 'antd';
 import * as React from 'react';
 import TimeInterval from '../TimeInterval';
 
@@ -10,6 +10,7 @@ interface props {
   maxCount?: number;
   disabled?: boolean;
   supportNextDay?: boolean;
+  radioGroupProps?: RadioGroupProps;
   formItemProps?: {
     fullTime: AvailableTimeFormItemProps;
     weeks: AvailableTimeFormItemProps;
@@ -32,18 +33,27 @@ const AvailableTime = React.memo<props>(
     maxCount = 3,
     disabled = false,
     supportNextDay,
+    radioGroupProps = {
+      options: [
+        {
+          label: '全时段',
+          value: true,
+        },
+        {
+          label: '指定时段',
+          value: false,
+        },
+      ],
+    },
     formItemProps = {
       fullTime: {
         name: 'fullTime',
-        label: '可用时间',
       },
       weeks: {
         name: 'weeks',
-        label: '周期',
       },
       times: {
         name: 'times',
-        label: '时段',
       },
     },
   }) => {
@@ -56,10 +66,7 @@ const AvailableTime = React.memo<props>(
           initialValue={true}
           {...formItemProps?.fullTime}
         >
-          <Radio.Group disabled={disabled}>
-            <Radio value={true}>全时段</Radio>
-            <Radio value={false}>指定时段</Radio>
-          </Radio.Group>
+          <Radio.Group {...radioGroupProps} disabled={disabled} />
         </Form.Item>
         <Form.Item noStyle dependencies={[formItemProps.fullTime.name]}>
           {({ getFieldValue }) => {
