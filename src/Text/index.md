@@ -5,6 +5,7 @@ title: Text 文本
 group:
   title: 数据展示
   order: 3
+toc: content
 ---
 
 ## 代码演示

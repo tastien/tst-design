@@ -5,6 +5,7 @@ title: PickerColor 颜色选择
 group:
   title: 数据录入
   order: 4
+toc: content
 ---
 
 ## 代码演示

@@ -5,6 +5,7 @@ title: MultipleOptionItem 选择输入联动
 group:
   title: 数据录入
   order: 4
+toc: content
 ---
 
 ## 代码演示

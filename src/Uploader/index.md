@@ -5,6 +5,7 @@ title: Uploader 上传
 group:
   title: 数据录入
   order: 4
+toc: content
 ---
 
 ## 何时使用

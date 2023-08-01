@@ -5,6 +5,7 @@ title: InputLevel 优先级输入框
 group:
   title: 数据录入
   order: 4
+toc: content
 ---
 
 ## 代码演示

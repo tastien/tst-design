@@ -5,6 +5,7 @@ title: StatusDot 状态点
 group:
   title: 通用
   order: 1
+toc: content
 ---
 
 ## 代码演示

@@ -5,6 +5,7 @@ title: ArchAndShopSelector 组织与门店选择
 group:
   title: 数据录入
   order: 4
+toc: content
 ---
 
 # 组织与门店选择

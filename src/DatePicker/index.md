@@ -5,6 +5,7 @@ title: DatePicker 日期选择
 group:
   title: H5
   order: 5
+toc: content
 ---
 
 # DatePicker 日期选择

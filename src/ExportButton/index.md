@@ -5,6 +5,7 @@ title: ExportButton 导出按钮
 group:
   title: 通用
   order: 1
+toc: content
 ---
 
 ## 代码演示

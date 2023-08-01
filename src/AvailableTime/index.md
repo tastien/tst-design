@@ -5,6 +5,7 @@ title: AvailableTime 可用时间
 group:
   title: 数据录入
   order: 4
+toc: content
 ---
 
 ## 代码演示
