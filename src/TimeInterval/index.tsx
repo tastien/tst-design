@@ -121,7 +121,7 @@ const TimeInterval = React.memo<TimeIntervalProps>(
                   const times = getFieldValue(name);
                   return (
                     (!times || times.length < maxCount) && (
-                      <Form.Item style={formItemProps?.style}>
+                      <Form.Item className="tst-time-interval-add-button">
                         <Button
                           type="link"
                           onClick={() => !disabled && add()}
