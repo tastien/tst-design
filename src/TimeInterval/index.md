@@ -34,9 +34,10 @@ toc: content
 
 ## API
 
-| 参数           | 说明                                                                     | 类型    | 默认值 |
-| -------------- | ------------------------------------------------------------------------ | ------- | ------ |
-| supportNextDay | 结束日期需要支持次日时使用                                               | boolean | false  |
-| disabled       | 需要禁止选择时使用                                                       | boolean | false  |
-| maxCount       | 当添加 3 个时段不满足需求时使用                                          | number  | 3      |
-| formItemProps  | 具体参考[antd.Form.Item](https://ant.design/components/form-cn#formitem) | -       | -      |
+| 参数           | 说明                                                                     | 类型    | 默认值   |
+| -------------- | ------------------------------------------------------------------------ | ------- | -------- |
+| supportNextDay | 结束日期需要支持次日时使用                                               | boolean | false    |
+| disabled       | 需要禁止选择时使用                                                       | boolean | false    |
+| maxCount       | 当添加 3 个时段不满足需求时使用                                          | number  | 3        |
+| formItemProps  | 具体参考[antd.Form.Item](https://ant.design/components/form-cn#formitem) | -       | -        |
+| addButtonName  | 支持修改添加按钮名称                                                     | string  | 新增时段 |

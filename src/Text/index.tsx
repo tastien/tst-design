@@ -1,7 +1,7 @@
 import { Typography } from 'antd';
 import classnames from 'classnames';
 import * as React from 'react';
-import styles from '../styles/global.module.less';
+import styles from '../global.less';
 
 interface TextProps {
   style?: React.CSSProperties;

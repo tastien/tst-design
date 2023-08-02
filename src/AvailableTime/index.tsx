@@ -1,4 +1,12 @@
-import { Checkbox, Form, FormItemProps, Radio, RadioGroupProps } from 'antd';
+import {
+  Checkbox,
+  Form,
+  FormItemProps,
+  Radio,
+  RadioGroupProps,
+  Space,
+} from 'antd';
+import _ from 'lodash';
 import * as React from 'react';
 import TimeInterval from '../TimeInterval';
 
@@ -7,9 +15,11 @@ type AvailableTimeFormItemProps = FormItemProps & {
 };
 
 interface props {
+  addButtonName?: string;
   maxCount?: number;
   disabled?: boolean;
   supportNextDay?: boolean;
+  radioDirection?: 'horizontal' | 'vertical';
   radioGroupProps?: RadioGroupProps;
   formItemProps?: {
     fullTime: AvailableTimeFormItemProps;
@@ -30,9 +40,11 @@ export const dayOptions = [
 
 const AvailableTime = React.memo<props>(
   ({
+    addButtonName = '新增时段',
     maxCount = 3,
     disabled = false,
     supportNextDay,
+    radioDirection = 'horizontal',
     radioGroupProps = {
       options: [
         {
@@ -66,7 +78,15 @@ const AvailableTime = React.memo<props>(
           initialValue={true}
           {...formItemProps?.fullTime}
         >
-          <Radio.Group {...radioGroupProps} disabled={disabled} />
+          <Radio.Group {..._.omit(radioGroupProps.options)} disabled={disabled}>
+            <Space direction={radioDirection}>
+              {radioGroupProps?.options?.map((item: any) => (
+                <Radio key={item.value} value={item.value}>
+                  {item.label}
+                </Radio>
+              ))}
+            </Space>
+          </Radio.Group>
         </Form.Item>
         <Form.Item noStyle dependencies={[formItemProps.fullTime.name]}>
           {({ getFieldValue }) => {
@@ -84,6 +104,7 @@ const AvailableTime = React.memo<props>(
                   <TimeInterval
                     maxCount={maxCount}
                     disabled={disabled}
+                    addButtonName={addButtonName}
                     supportNextDay={supportNextDay}
                     formItemProps={formItemProps.times}
                   />

@@ -10,6 +10,7 @@ interface TimeIntervalProps {
   disabled?: boolean;
   maxCount?: number;
   formItemProps?: FormItemProps;
+  addButtonName?: string;
 }
 
 const CustomTimePicker = (props: {
@@ -51,7 +52,13 @@ const defaultFormItemProps = {
 };
 
 const TimeInterval = React.memo<TimeIntervalProps>(
-  ({ supportNextDay, disabled, formItemProps, maxCount = 3 }) => {
+  ({
+    supportNextDay,
+    disabled,
+    formItemProps,
+    maxCount = 3,
+    addButtonName = '新增时段',
+  }) => {
     const name = formItemProps?.name || defaultFormItemProps.name;
 
     return (
@@ -67,7 +74,7 @@ const TimeInterval = React.memo<TimeIntervalProps>(
             {
               validator: async (_, names) => {
                 if (!names || names.length < 1) {
-                  return Promise.reject(new Error('请新增时段'));
+                  return Promise.reject(new Error(`请${addButtonName}`));
                 }
               },
             },
@@ -127,8 +134,9 @@ const TimeInterval = React.memo<TimeIntervalProps>(
                           onClick={() => !disabled && add()}
                           icon={<PlusOutlined />}
                           disabled={disabled}
+                          style={{ padding: 0 }}
                         >
-                          {`新增时段（${times?.length || 0}/${maxCount}）`}
+                          {`${addButtonName}（最多允许${maxCount}）`}
                         </Button>
                         {formItemProps?.required && (
                           <Form.ErrorList errors={errors} />
