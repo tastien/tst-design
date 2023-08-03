@@ -1,11 +1,10 @@
 import { Typography } from 'antd';
 import classnames from 'classnames';
 import * as React from 'react';
-import styles from '../global.less';
-
+import '../global.less';
 interface TextProps {
   style?: React.CSSProperties;
-  type: 'primary' | 'grey';
+  type?: 'primary' | 'grey';
   children: React.ReactNode;
   className?: string;
 }
@@ -16,7 +15,7 @@ const Text = ({
   className,
   ...rest
 }: TextProps) => {
-  const cls = classnames(styles.tst_primary_color, className);
+  const primaryCls = classnames('tst-primary-color', className);
 
   if (type === 'grey') {
     return (
@@ -27,7 +26,7 @@ const Text = ({
   }
 
   return (
-    <span className={cls} {...rest}>
+    <span className={primaryCls} {...rest}>
       {children}
     </span>
   );
