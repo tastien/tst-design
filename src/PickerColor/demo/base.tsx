@@ -3,7 +3,7 @@ import { Button, Form } from 'antd';
 import React from 'react';
 
 const App = () => {
-  const initialValues = { color: { r: 26, g: 14, b: 85, a: 1 } };
+  const initialValues = { color: '#b62021' };
   const handleOnFinish = (values: { color: ColorPickerValue }) => {
     console.log(values);
   };

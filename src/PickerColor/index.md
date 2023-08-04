@@ -16,9 +16,8 @@ toc: content
 
 ## API
 
-| 参数        | 说明                           | 类型                    | 默认值 |
-| ----------- | ------------------------------ | ----------------------- | ------ |
-| popup       | 是否以气泡卡片的形式           | boolean                 | -      |
-| value       | 值                             | ColorPickerValue        | -      |
-| onChange    | 修改内容后的回调函数           | (value: string) => void | -      |
-| blockStyles | 气泡卡片的形式时，选中块的样式 | (value: string) => void | -      |
+| 参数     | 说明                 | 类型                    | 默认值 |
+| -------- | -------------------- | ----------------------- | ------ |
+| popup    | 是否以气泡卡片的形式 | boolean                 | -      |
+| value    | 值                   | ColorPickerValue        | -      |
+| onChange | 修改内容后的回调函数 | (value: string) => void | -      |

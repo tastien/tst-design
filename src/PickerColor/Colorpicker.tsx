@@ -1,5 +1,5 @@
 import { Popover } from 'antd';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import * as ReactColor from 'react-color';
 import { Color, ColorResult } from 'react-color';
 import tinycolor from 'tinycolor2';
@@ -21,7 +21,6 @@ type Props = {
   onChange?: (value: any) => void;
   onChangeComplete?: (value: any) => void;
   onColorResult?: (color: ColorPickerResult) => AnyColorFormat;
-  blockStyles?: CSSProperties;
   [key: string]: any;
 };
 
@@ -31,9 +30,6 @@ const Colorpicker = ({
   onChangeComplete,
   onColorResult,
   popup = true,
-  blockStyles = {
-    width: '100px',
-  },
   ...props
 }: Props) => {
   const formatColor = (color?: AnyColorFormat) => {
@@ -82,13 +78,26 @@ const Colorpicker = ({
   const blStyles = Object.assign(
     {},
     {
-      width: '50px',
-      height: '20px',
       display: 'inline-flex',
-      border: '2px solid #fff',
-      boxShadow: '0 0 0 1px #ccc',
+      alignItems: 'center',
+      justifyContent: 'center',
+      border: '1px solid #d9d9d9',
+      padding: '1px',
+      width: '32px',
+      height: '32px',
+      borderRadius: '6px',
+      cursor: 'pointer',
     },
-    blockStyles,
+  );
+
+  const blInnerStyles = Object.assign(
+    {},
+    {
+      width: '24px',
+      height: '24px',
+      border: '1px solid #d9d9d9',
+      borderRadius: '4px',
+    },
     { background: getBackgroundBlockColor(value) },
   );
 
@@ -108,7 +117,9 @@ const Colorpicker = ({
             />
           }
         >
-          <div style={blStyles} />
+          <div style={blStyles}>
+            <div style={blInnerStyles} />
+          </div>
         </Popover>
       ) : (
         <Picker
