@@ -136,7 +136,7 @@ const TimeInterval = React.memo<TimeIntervalProps>(
                           disabled={disabled}
                           style={{ padding: 0 }}
                         >
-                          {`${addButtonName}（最多允许${maxCount}）`}
+                          {`${addButtonName}（最多允许${maxCount}）个`}
                         </Button>
                         {formItemProps?.required && (
                           <Form.ErrorList errors={errors} />
