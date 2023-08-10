@@ -26,6 +26,7 @@ const StatusDot = ({ type, text, radius = 8, style }: StatusDotProps) => {
       }}
     >
       <div
+        data-testid="status_dot"
         style={{
           backgroundColor: bgColorMap[type],
           borderRadius: '50%',

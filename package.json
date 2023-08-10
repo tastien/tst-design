@@ -21,7 +21,8 @@
     "prepare": "husky install && dumi setup",
     "prepublishOnly": "father doctor && npm run build",
     "start": "npm run dev",
-    "test": "jest"
+    "test": "jest",
+    "test-w": "jest --watch"
   },
   "commitlint": {
     "extends": [

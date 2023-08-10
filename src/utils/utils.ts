@@ -68,9 +68,14 @@ export const showExportAnimation = async (position: {
 };
 
 export function isSuccResponse(response: IResponse<any>, defaultMsg?: string) {
-  if (!response) return defaultMsg && message.error(defaultMsg) && false;
-  if (response.code !== 200)
-    return response.msg && message.error(response.msg) && false;
+  if (!response) {
+    message.error(defaultMsg);
+    return false;
+  }
+  if (response.code !== 200) {
+    message.error(response.msg);
+    return false;
+  }
   return true;
 }
 
@@ -85,3 +90,22 @@ export const checkFile = (file: File, limitSize: number) => {
 
   return true;
 };
+
+/**
+ *
+ * @param rgb string
+ * @returns string
+ *
+ * 将rgb颜色转为16进制颜色
+ */
+export function rgbToHex(rgb: string) {
+  const r = parseInt(rgb.split('(')[1].split(',')[0]);
+  const g = parseInt(rgb.split(',')[1]);
+  const b = parseInt(rgb.split(',')[2].split(')')[0]);
+
+  const hexR = r.toString(16).padStart(2, '0')?.toUpperCase();
+  const hexG = g.toString(16).padStart(2, '0')?.toUpperCase();
+  const hexB = b.toString(16).padStart(2, '0')?.toUpperCase();
+
+  return `#${hexR}${hexG}${hexB}`;
+}
