@@ -16,6 +16,7 @@ export type DateSelectFilterProps = Pick<
   defaultDateType?: ValueEnums;
   onChange?: (...args: Value) => void;
   endMoment?: Moment;
+  rangeLimit?: number;
 };
 
 const DateSelectFilter = ({
@@ -26,6 +27,7 @@ const DateSelectFilter = ({
   defaultValue,
   endMoment = moment().endOf('day').subtract(1, 'days'),
   picks = ['DAY_1', 'DAY_7', 'DAY_30', 'CUSTOM'],
+  rangeLimit = 31,
   ...restProps
 }: DateSelectFilterProps) => {
   const showOptions = useMemo(
@@ -79,6 +81,7 @@ const DateSelectFilter = ({
       {DateRender && (
         <DateRender
           {...restProps}
+          rangeLimit={rangeLimit}
           defaultValue={defaultValue}
           endMoment={endMoment}
           onChange={handleDatePickerChange}
