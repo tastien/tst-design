@@ -1,5 +1,6 @@
 import { TimeInterval } from '@tastien/tstd';
 import { Button, Form } from 'antd';
+import moment from 'moment';
 import React from 'react';
 
 const App: React.FC = () => {
@@ -10,7 +11,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <Form onFinish={onFinish} form={form}>
+    <Form
+      onFinish={onFinish}
+      form={form}
+      initialValues={{
+        times: [[moment('00:00', 'HH:mm'), moment('23:59', 'HH:mm')]],
+      }}
+    >
       <TimeInterval
         formItemProps={{
           required: true,

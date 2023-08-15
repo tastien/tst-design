@@ -1,5 +1,6 @@
 import { AvailableTime } from '@tastien/tstd';
 import { Button, Form } from 'antd';
+import moment from 'moment';
 import React from 'react';
 
 const App: React.FC = () => {
@@ -15,6 +16,9 @@ const App: React.FC = () => {
       form={form}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
+      initialValues={{
+        saleTimes: [[moment('00:00', 'HH:mm'), moment('23:59', 'HH:mm')]],
+      }}
     >
       <AvailableTime
         formItemProps={{
