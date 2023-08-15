@@ -68,18 +68,7 @@ const TimeInterval = React.memo<TimeIntervalProps>(
         labelCol={formItemProps?.labelCol}
         wrapperCol={formItemProps?.wrapperCol}
       >
-        <Form.List
-          name={name}
-          rules={[
-            {
-              validator: async (_, names) => {
-                if (!names || names.length < 1) {
-                  return Promise.reject(new Error(`请${addButtonName}`));
-                }
-              },
-            },
-          ]}
-        >
+        <Form.List name={name}>
           {(fields, { add, remove }, { errors }) => (
             <>
               {fields.map((field) => {
@@ -136,7 +125,7 @@ const TimeInterval = React.memo<TimeIntervalProps>(
                           disabled={disabled}
                           style={{ padding: 0 }}
                         >
-                          {`${addButtonName}（最多允许${maxCount}）个`}
+                          {`${addButtonName}（最多允许${maxCount}个）`}
                         </Button>
                         {formItemProps?.required && (
                           <Form.ErrorList errors={errors} />
