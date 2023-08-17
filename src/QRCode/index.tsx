@@ -43,6 +43,7 @@ const QRCode: FC<TProps> = (props) => {
     colorLight = '#FFFFFF',
     icon,
     iconSize = 40,
+    ...args
   } = props;
   const ref = useRef<HTMLDivElement>(null);
   const id = uniqueId();
@@ -65,6 +66,7 @@ const QRCode: FC<TProps> = (props) => {
 
   return (
     <div
+      {...args}
       data-testid="qrcode_component"
       style={{
         width: size,
