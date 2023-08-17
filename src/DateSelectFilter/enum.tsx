@@ -27,18 +27,19 @@ export type DateRenderProps = {
   rangeLimit?: number;
   disabledDate?: RangePickerProps<Moment>['disabledDate'];
   defaultValue?: Moment[];
+  value?: Moment[];
   endMoment: Moment;
   onChange: (dateInfo: Moment[]) => void;
 };
 
-type DATE_SELECT_OPTION = {
+export type DATE_TYPE_OPTION = {
   value: ValueEnums;
   label: ReactNode;
   DateRender: React.FC<DateRenderProps>;
   time?: Moment[];
 };
 
-export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
+export const DATE_TYPE_OPTIONS: DATE_TYPE_OPTION[] = [
   {
     value: 'DAY_0' as const,
     label: '今天',
@@ -79,7 +80,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -90,7 +91,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -101,7 +102,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -112,7 +113,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -123,7 +124,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -135,7 +136,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -146,7 +147,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -158,7 +159,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -186,9 +187,11 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
         <Space>
           <DatePicker
             allowClear={false}
-            disabledDate={disabledDate || ((m) => m.isAfter(realEndMoment))}
+            disabledDate={
+              disabledDate || ((m: Moment) => m.isAfter(realEndMoment))
+            }
             value={time}
-            onChange={(m) => setTime(m!.startOf('week'))}
+            onChange={(m: any) => setTime(m!.startOf('week'))}
           />
           &nbsp;&nbsp;~&nbsp;&nbsp;
           <DatePicker disabled value={time.clone().endOf('week')} />
@@ -222,7 +225,9 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
         <DatePicker
           picker="month"
           allowClear={false}
-          disabledDate={disabledDate || ((m) => m.isAfter(realEndMoment))}
+          disabledDate={
+            disabledDate || ((m: Moment) => m.isAfter(realEndMoment))
+          }
           value={month}
           onChange={setMonth as any}
         />
@@ -230,7 +235,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
     },
   },
   {
-    value: 'DATE' as any,
+    value: 'DATE',
     label: '自然日',
     DateRender: ({ defaultValue, disabledDate, endMoment, onChange }) => {
       const [date, setDate] = useState(() =>
@@ -245,8 +250,8 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
         <DatePicker
           allowClear={false}
           value={date}
-          disabledDate={disabledDate || ((m) => m.isAfter(endMoment))}
-          onChange={setDate as any}
+          disabledDate={disabledDate || ((m: Moment) => m.isAfter(endMoment))}
+          onChange={setDate}
         />
       );
     },
@@ -273,7 +278,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -284,7 +289,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -298,7 +303,7 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       useEffect(() => {
         onChange(rangeData);
       }, []);
-      return <RangePicker disabled value={rangeData as any} />;
+      return <RangePicker disabled value={rangeData} />;
     },
   },
   {
@@ -310,22 +315,27 @@ export const DATE_SELECT_OPTIONS: DATE_SELECT_OPTION[] = [
       rangeLimit,
       endMoment,
       onChange,
+      value,
     }) => {
-      const [value, setValue] = useState(
-        () => defaultValue || [endMoment, endMoment],
-      );
+      const initValue = value || defaultValue;
+      const startMoment = initValue ? initValue[0] : endMoment;
+
+      const [valueState, setValueState] = useState(() => [
+        startMoment,
+        endMoment,
+      ]);
 
       useEffect(() => {
-        onChange(value);
-      }, [value]);
+        onChange(valueState);
+      }, [valueState]);
 
       return (
         <CustomRangePicker
           allowClear={false}
-          disabledDate={disabledDate || ((m) => m.isAfter(endMoment))}
-          value={value as any}
+          disabledDate={disabledDate || ((m: Moment) => m.isAfter(endMoment))}
+          value={valueState}
           rangeLimit={rangeLimit}
-          onChange={setValue as any}
+          onChange={setValueState as any}
         />
       );
     },

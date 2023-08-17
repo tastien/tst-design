@@ -2558,10 +2558,10 @@
     domhandler "^4.2.0"
     selderee "^0.6.0"
 
-"@shihengtech/hooks@^0.0.16":
-  version "0.0.16"
-  resolved "https://registry.npmmirror.com/@shihengtech/hooks/-/hooks-0.0.16.tgz#2351fbabe779695c8f7d4b6dac5fcb8d9865e004"
-  integrity sha512-Xoh9xkaGeyCuCC1h4u/GcAINDyLZ9VspZ/lP7E/XNzO1bk6DokrhjWGxJ3WARm9O4aYxIMtGiWy7tiSfERWmEA==
+"@shihengtech/hooks@^1.0.11":
+  version "1.0.11"
+  resolved "https://registry.npmmirror.com/@shihengtech/hooks/-/hooks-1.0.11.tgz#c02ac3e1d8525047156f101ca5f5864a6a7e8606"
+  integrity sha512-kGYnMedLio4tp38DWTaAp3AwkxDwS3uJUnYsp6FKoGAfo23qgzSU/fmJWVGyfy1OG1fl6ZvcutgkiL9yKOyt5A==
 
 "@sinclair/typebox@^0.25.16":
   version "0.25.21"
