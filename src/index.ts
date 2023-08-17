@@ -27,6 +27,7 @@ export type {
   ColorPickerTypes,
   ColorPickerValue,
 } from './PickerColor';
+export { default as QRCode } from './QRCode';
 export { default as StartEndDate } from './StartEndDate';
 export { default as StatusDot } from './StatusDot';
 export { default as Text } from './Text';
