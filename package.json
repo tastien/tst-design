@@ -30,7 +30,7 @@
     ]
   },
   "lint-staged": {
-    "*.{json}": [
+    "*.{md,json}": [
       "prettier --write --no-error-on-unmatched-pattern"
     ],
     "*.{js,jsx}": [
