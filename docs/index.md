@@ -1,8 +1,8 @@
 ---
-title: Tst Design - 为塔斯汀信息部定制的组件库
+title: Tst Design - 塔斯汀IT中心业务组件库
 hero:
   title: Tst Design
-  description: 为塔斯汀信息部定制的组件库
+  description: 塔斯汀IT中心业务组件库
   actions:
     - text: 立即使用
       link: /components/export-button
@@ -12,8 +12,8 @@ features:
     description: 熟悉antd的研发可无缝上手
   - title: 定制
     emoji: 💎
-    description: 为塔斯汀信息部专门定制
+    description: 为塔斯汀IT中心专门定制
   - title: 提效
     emoji: 🚀
-    description: 致力于提升塔斯汀信息部研发效率
+    description: 致力于提升塔斯汀IT中心研发效率
 ---
