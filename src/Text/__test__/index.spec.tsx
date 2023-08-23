@@ -20,9 +20,23 @@ describe('>>> component Text', () => {
     expect(element?.classList.contains('tst-primary-color')).toBeTruthy();
   });
 
-  it('when type is grey', () => {
-    const { queryByText } = render(<Text type="grey">grey</Text>);
-    const element = queryByText('grey');
-    expect(element?.classList.contains('tst-primary-color')).toBeFalsy();
+  it('when with type is grey show correctly', () => {
+    const { queryByText } = render(<Text>grey text</Text>);
+    const element = queryByText('primary text');
+    expect(element?.classList.contains('tst-text-grey')).toBeTruthy();
+  });
+
+  it('with the ellipsisWidth props show correctly', () => {
+    const { queryByText } = render(
+      <Text ellipsisWidth={100}>塔斯汀主题色的文本</Text>,
+    );
+    const element = queryByText('塔斯汀主题色的文本');
+    expect(element?.classList.contains('tst-text-ellipsis')).toBeTruthy();
+  });
+
+  it('with the bold props show correctly', () => {
+    const { queryByText } = render(<Text bold>塔斯汀主题色的文本</Text>);
+    const element = queryByText('塔斯汀主题色的文本');
+    expect(element?.classList.contains('tst-text-bold')).toBeTruthy();
   });
 });
