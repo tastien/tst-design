@@ -24,7 +24,6 @@ export { default as PickerColor } from './PickerColor';
 export type {
   AnyColorFormat,
   ColorPickerResult,
-  ColorPickerTypes,
   ColorPickerValue,
 } from './PickerColor';
 export { default as QRCode } from './QRCode';

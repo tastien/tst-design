@@ -2,7 +2,12 @@ import { Row, Select } from 'antd';
 import moment, { Moment } from 'moment';
 import React, { useMemo, useState } from 'react';
 import QuickDateSelect from './components/QuickDateSelect';
-import { DateRenderProps, DATE_SELECT_OPTIONS, ValueEnums } from './enum';
+import {
+  DateRenderProps,
+  DATE_TYPE_OPTION,
+  DATE_TYPE_OPTIONS,
+  ValueEnums,
+} from './enum';
 
 type Value = [Moment[], string[], ValueEnums];
 
@@ -30,20 +35,25 @@ const DateSelectFilter = ({
   rangeLimit = 31,
   ...restProps
 }: DateSelectFilterProps) => {
-  const showOptions = useMemo(
+  const dateTypeOptions: DATE_TYPE_OPTION[] = useMemo(
     () =>
       picks.map(
-        (pick) => DATE_SELECT_OPTIONS.find((item) => item.value === pick)!,
+        (pick) =>
+          DATE_TYPE_OPTIONS.find(
+            (item) => item.value === pick,
+          ) as DATE_TYPE_OPTION,
       ),
     [],
   );
-  const initDateType = defaultDateType || showOptions[0].value;
-  const [dateType, setDateType] = useState(initDateType);
 
-  const selectedDateOption = showOptions.find(
+  const [dateType, setDateType] = useState(
+    defaultDateType || dateTypeOptions[0].value,
+  );
+
+  const dateTypeOption = dateTypeOptions.find(
     (item) => item.value === dateType,
   );
-  const DateRender = selectedDateOption?.DateRender;
+  const DateRender = dateTypeOption?.DateRender;
 
   const handleDatePickerChange = (values: moment.Moment[]) => {
     onChange?.(
@@ -72,7 +82,7 @@ const DateSelectFilter = ({
         style={{ width: 120, marginRight: 8 }}
         onChange={setDateType}
       >
-        {showOptions.map(({ label, value }) => (
+        {dateTypeOptions.map(({ label, value }) => (
           <Select.Option key={value} value={value}>
             {label}
           </Select.Option>

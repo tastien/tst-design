@@ -39,7 +39,7 @@ const QuickDateSelect = ({
       allowClear={false}
       defaultValue={showRanges[Object.keys(showRanges)[0]]}
       ranges={showRanges}
-      disabledDate={(m) => m.isAfter(endMoment)}
+      disabledDate={(m: Moment) => m.isAfter(endMoment)}
       onChange={onChange}
     />
   );

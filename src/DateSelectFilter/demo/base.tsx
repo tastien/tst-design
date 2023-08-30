@@ -1,4 +1,5 @@
 import { DateSelectFilter } from '@tastien/tstd';
+import moment from 'moment';
 import React from 'react';
 
 const App = () => (
@@ -17,6 +18,7 @@ const App = () => (
       'LAST_MONTH',
       'CUSTOM',
     ]}
+    value={[moment().subtract(30, 'days'), moment().subtract(2, 'days')]}
   />
 );
 
