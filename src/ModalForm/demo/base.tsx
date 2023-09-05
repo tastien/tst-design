@@ -10,11 +10,12 @@ const App: React.FC = () => {
       }, 1000);
     });
   };
+
   const loading = async () => {
     await someAsyncFunction();
   };
+
   return (
-    //需要默认loading状态请将onFinish/onOk设置成异步
     <ModalForm
       trigger={<Button type="primary">ModalForm</Button>}
       onFinish={async (e) => {

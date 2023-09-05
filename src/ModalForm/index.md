@@ -12,6 +12,8 @@ toc: content
 
 ### 基本用法
 
+- 需要默认 loading 状态请将 onFinish/onOk 设置成异步
+
 <code src="./demo/base.tsx"></code>
 
 ### 隐藏底部按钮

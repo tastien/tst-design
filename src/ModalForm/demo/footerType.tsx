@@ -10,9 +10,11 @@ const App: React.FC = () => {
       }, 1000);
     });
   };
+
   const loading = async () => {
     await someAsyncFunction();
   };
+
   return (
     <ModalForm
       trigger={<Button type="primary">自定义按钮样式</Button>}

@@ -6,6 +6,7 @@ const App: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [form] = Form.useForm();
+
   const someAsyncFunction = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -13,6 +14,7 @@ const App: React.FC = () => {
       }, 1000);
     });
   };
+
   const handleOk = async () => {
     setLoading(true);
     await someAsyncFunction();
@@ -26,6 +28,7 @@ const App: React.FC = () => {
   const awaitLoading = async () => {
     await someAsyncFunction();
   };
+
   return (
     <ModalForm
       form={form}
@@ -42,13 +45,11 @@ const App: React.FC = () => {
       onFinish={async (e) => {
         await awaitLoading();
         console.log(e, 'onFinish');
-
         setOpen(false);
         setLoading(false);
       }}
       modalProps={{
         open: open,
-        //右上角的 X 关闭需要onCancel
         onCancel() {
           handleCancel();
         },
