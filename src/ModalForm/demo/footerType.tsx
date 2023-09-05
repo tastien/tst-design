@@ -14,17 +14,29 @@ const App: React.FC = () => {
     await someAsyncFunction();
   };
   return (
-    //需要默认loading状态请将onFinish/onOk设置成异步
     <ModalForm
-      trigger={<Button type="primary">ModalForm</Button>}
-      onFinish={async (e) => {
+      trigger={<Button type="primary">自定义按钮样式</Button>}
+      onFinish={async () => {
         await loading();
-        console.log(e, 'onFinish');
+        console.log('onFinish');
       }}
       modalProps={{
-        async onOk(e) {
+        okButtonProps: {
+          style: {
+            backgroundColor: 'skyblue',
+            borderColor: 'skyblue',
+          },
+        },
+        cancelButtonProps: {
+          style: {
+            backgroundColor: 'yellow',
+            borderColor: 'yellow',
+          },
+        },
+        okText: '提交',
+        async onOk() {
           await loading();
-          console.log(e, 'onOk');
+          console.log('onCancel');
         },
         onCancel() {
           console.log('onCancel');
