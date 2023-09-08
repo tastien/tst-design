@@ -1,10 +1,10 @@
 import { Form, FormProps, Modal, ModalProps } from 'antd';
 import React, { useState } from 'react';
-type ModalFormItems = {
+type ModalFormProps = {
   /**
    * 触发弹窗的内容
    */
-  trigger: React.ReactNode;
+  trigger?: React.ReactNode;
   /**
    * Modal的属性
    */
@@ -20,7 +20,7 @@ const ModalForm = ({
   children,
   modalProps,
   ...formProps
-}: ModalFormItems & FormProps) => {
+}: ModalFormProps & FormProps) => {
   const [form] = Form.useForm();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -29,20 +29,11 @@ const ModalForm = ({
     setIsModalOpen(true);
   };
 
-  const handleOk = async (
-    e: React.MouseEvent<HTMLElement, MouseEvent>,
-    onOk?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void,
-  ) => {
-    if (onOk) {
-      await onOk(e);
-    }
-    (formProps.form || form).submit();
-  };
-
   const handleCancel = (
     e: React.MouseEvent<HTMLElement, MouseEvent>,
     onCancel?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void,
   ) => {
+    e.preventDefault();
     if (onCancel) {
       onCancel(e);
     }
@@ -52,7 +43,7 @@ const ModalForm = ({
 
   return (
     <>
-      <div onClick={showModal}>{trigger}</div>
+      {trigger && <div onClick={showModal}>{trigger}</div>}
       <Modal
         title="Basic Modal"
         confirmLoading={confirmLoading}
@@ -62,9 +53,9 @@ const ModalForm = ({
           disabled: modalProps?.confirmLoading || confirmLoading,
           ...modalProps?.cancelButtonProps,
         }}
-        onOk={(e) => {
+        onOk={() => {
           setConfirmLoading(true);
-          handleOk(e, modalProps?.onOk);
+          (formProps.form || form).submit();
         }}
         onCancel={(e) => handleCancel(e, modalProps?.onCancel)}
       >

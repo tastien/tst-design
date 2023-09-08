@@ -58,20 +58,19 @@ const App: React.FC = () => {
             取消
           </Button>,
           <Button
+            key="reset"
+            onClick={() => form.resetFields()}
+            disabled={loading}
+          >
+            重置
+          </Button>,
+          <Button
             key="submit"
             type="primary"
             onClick={handleOk}
             loading={loading}
           >
             确定
-          </Button>,
-          <Button
-            key="custom"
-            type="primary"
-            onClick={handleOk}
-            loading={loading}
-          >
-            自定义xx
           </Button>,
         ],
       }}

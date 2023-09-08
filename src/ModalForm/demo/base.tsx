@@ -23,10 +23,6 @@ const App: React.FC = () => {
         console.log(e, 'onFinish');
       }}
       modalProps={{
-        async onOk(e) {
-          await loading();
-          console.log(e, 'onOk');
-        },
         onCancel() {
           console.log('onCancel');
         },

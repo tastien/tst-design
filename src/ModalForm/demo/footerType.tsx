@@ -36,10 +36,6 @@ const App: React.FC = () => {
           },
         },
         okText: '提交',
-        async onOk() {
-          await loading();
-          console.log('onCancel');
-        },
         onCancel() {
           console.log('onCancel');
         },
