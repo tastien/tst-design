@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 const App: React.FC = () => {
   const [open, setOpen] = useState(false);
   const [form] = Form.useForm();
+
   const someAsyncFunction = () => {
     return new Promise((resolve) => {
       setTimeout(() => {
@@ -15,10 +16,6 @@ const App: React.FC = () => {
 
   const handleCancel = () => {
     setOpen(false);
-  };
-
-  const awaitLoading = async () => {
-    await someAsyncFunction();
   };
 
   return (
@@ -61,7 +58,7 @@ const App: React.FC = () => {
       <ModalForm
         form={form}
         onFinish={async (e) => {
-          await awaitLoading();
+          await someAsyncFunction();
           setOpen(false);
           console.log(e, 'onFinish');
         }}

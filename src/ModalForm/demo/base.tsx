@@ -11,15 +11,11 @@ const App: React.FC = () => {
     });
   };
 
-  const loading = async () => {
-    await someAsyncFunction();
-  };
-
   return (
     <ModalForm
       trigger={<Button type="primary">ModalForm</Button>}
       onFinish={async (e) => {
-        await loading();
+        await someAsyncFunction();
         console.log(e, 'onFinish');
       }}
       modalProps={{

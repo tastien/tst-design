@@ -25,10 +25,6 @@ const App: React.FC = () => {
     setOpen(false);
   };
 
-  const awaitLoading = async () => {
-    await someAsyncFunction();
-  };
-
   return (
     <ModalForm
       form={form}
@@ -39,11 +35,11 @@ const App: React.FC = () => {
             setOpen(true);
           }}
         >
-          自定义footer
+          自定义 footer
         </Button>
       }
       onFinish={async (e) => {
-        await awaitLoading();
+        await someAsyncFunction();
         console.log(e, 'onFinish');
         setOpen(false);
         setLoading(false);

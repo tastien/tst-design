@@ -25,10 +25,6 @@ const ModalForm = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
 
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
   const handleCancel = (
     e: React.MouseEvent<HTMLElement, MouseEvent>,
     onCancel?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void,
@@ -43,7 +39,7 @@ const ModalForm = ({
 
   return (
     <>
-      {trigger && <div onClick={showModal}>{trigger}</div>}
+      {trigger && <div onClick={() => setIsModalOpen(true)}>{trigger}</div>}
       <Modal
         title="Basic Modal"
         confirmLoading={confirmLoading}

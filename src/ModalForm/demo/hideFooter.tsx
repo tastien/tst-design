@@ -5,7 +5,7 @@ import React from 'react';
 const App: React.FC = () => {
   return (
     <ModalForm
-      trigger={<Button type="primary">隐藏footer</Button>}
+      trigger={<Button type="primary">隐藏 footer</Button>}
       modalProps={{
         footer: null,
       }}
