@@ -7,6 +7,7 @@ const App: React.FC = () => {
     <ModalForm
       trigger={<Button type="primary">隐藏 footer</Button>}
       modalProps={{
+        title: 'hideFooterModalForm',
         footer: null,
       }}
     >

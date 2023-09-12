@@ -34,9 +34,10 @@ toc: content
 
 ## API
 
-| 参数       | 说明         | 类型                                                      | 默认值 |
-| ---------- | ------------ | --------------------------------------------------------- | ------ |
-| trigger    | 触发内容     | React.ReactNode                                           | -      |
-| modalProps | Modal 的参数 | [ModalProps](https://ant.design/components/modal-cn/#api) | -      |
-| children   | 表单内容     | React.ReactNode                                           | -      |
-| formProps  | Form 的参数  | [FormProps](https://ant.design/components/form-cn#form)   | -      |
+| 参数       | 说明                 | 类型                                                      | 默认值 |
+| ---------- | -------------------- | --------------------------------------------------------- | ------ |
+| formRef    | 绑定在 Form 上的 ref | React.MutableRefObject                                    | -      |
+| trigger    | 触发内容             | React.ReactNode                                           | -      |
+| modalProps | Modal 的参数         | [ModalProps](https://ant.design/components/modal-cn/#api) | -      |
+| children   | 表单内容             | React.ReactNode                                           | -      |
+| formProps  | Form 的参数          | [FormProps](https://ant.design/components/form-cn#form)   | -      |

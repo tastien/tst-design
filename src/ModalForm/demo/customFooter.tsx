@@ -1,11 +1,11 @@
 import { ModalForm } from '@tastien/tstd';
 import { Button, Form, Input } from 'antd';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { ModalFormRef } from '..';
 
 const App: React.FC = () => {
-  const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [form] = Form.useForm();
+  const formRef = useRef<ModalFormRef>();
 
   const someAsyncFunction = () => {
     return new Promise((resolve) => {
@@ -18,21 +18,17 @@ const App: React.FC = () => {
   const handleOk = async () => {
     setLoading(true);
     await someAsyncFunction();
-    form.submit();
-  };
-
-  const handleCancel = () => {
-    setOpen(false);
+    formRef.current?.submit();
   };
 
   return (
     <ModalForm
-      form={form}
+      formRef={formRef}
       trigger={
         <Button
           type="primary"
           onClick={() => {
-            setOpen(true);
+            formRef.current?.setController({ open: true });
           }}
         >
           自定义 footer
@@ -41,21 +37,25 @@ const App: React.FC = () => {
       onFinish={async (e) => {
         await someAsyncFunction();
         console.log(e, 'onFinish');
-        setOpen(false);
+        formRef.current?.setController({ open: false });
         setLoading(false);
       }}
       modalProps={{
-        open: open,
-        onCancel() {
-          handleCancel();
-        },
+        title: 'customFooterModalForm',
         footer: [
-          <Button key="cancel" onClick={handleCancel} disabled={loading}>
+          <Button
+            key="cancel"
+            onClick={() => {
+              formRef.current?.setController({ open: false });
+              formRef.current?.resetFields();
+            }}
+            disabled={loading}
+          >
             取消
           </Button>,
           <Button
             key="reset"
-            onClick={() => form.resetFields()}
+            onClick={() => formRef.current?.resetFields()}
             disabled={loading}
           >
             重置

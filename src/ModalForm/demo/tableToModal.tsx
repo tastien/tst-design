@@ -1,10 +1,15 @@
 import { ModalForm } from '@tastien/tstd';
 import { Form, Input, Table } from 'antd';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
+import { ModalFormRef } from '..';
 
 const App: React.FC = () => {
-  const [open, setOpen] = useState(false);
-  const [form] = Form.useForm();
+  const [data, setData] = useState<{ name: string; age: number }[]>([
+    { name: '小明', age: 11 },
+    { name: '小红', age: 12 },
+    { name: '小军', age: 13 },
+  ]);
+  const formRef = useRef<ModalFormRef>();
 
   const someAsyncFunction = () => {
     return new Promise((resolve) => {
@@ -12,10 +17,6 @@ const App: React.FC = () => {
         resolve('loading');
       }, 1000);
     });
-  };
-
-  const handleCancel = () => {
-    setOpen(false);
   };
 
   return (
@@ -35,12 +36,15 @@ const App: React.FC = () => {
           {
             title: '操作',
             width: 90,
-            render(_, record) {
+            render(_, record, idx) {
               return (
                 <a
                   onClick={() => {
-                    form.setFieldsValue({ name: record.name, age: record.age });
-                    setOpen(true);
+                    formRef.current?.setFieldsValue({
+                      name: record.name,
+                      age: record.age,
+                    });
+                    formRef.current?.setController({ open: true, idx });
                   }}
                 >
                   编辑
@@ -49,25 +53,18 @@ const App: React.FC = () => {
             },
           },
         ]}
-        dataSource={[
-          { name: '小明', age: 11 },
-          { name: '小红', age: 12 },
-          { name: '小军', age: 13 },
-        ]}
+        dataSource={data}
       />
       <ModalForm
-        form={form}
-        onFinish={async (e) => {
+        formRef={formRef}
+        onFinish={async (e, idx: number) => {
           await someAsyncFunction();
-          setOpen(false);
+          data[idx] = e;
+          setData([...data]);
           console.log(e, 'onFinish');
         }}
         modalProps={{
-          open: open,
-          onCancel() {
-            handleCancel();
-            console.log('onCancel');
-          },
+          title: 'ModalForm',
         }}
       >
         <Form.Item name="name" label="姓名">

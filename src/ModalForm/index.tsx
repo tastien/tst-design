@@ -1,77 +1,118 @@
-import { Form, FormProps, Modal, ModalProps } from 'antd';
-import React, { useState } from 'react';
+import { Form, FormInstance, FormProps, Modal, ModalProps } from 'antd';
+import React, {
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+  useState,
+} from 'react';
+
+type setControllerProps = {
+  open?: boolean;
+  loading?: boolean;
+  idx?: number;
+};
+
+export type ModalFormRef<T = any> = FormInstance<T> & {
+  setController: (props: setControllerProps) => T;
+};
+
 type ModalFormProps = {
-  /**
-   * 触发弹窗的内容
-   */
+  //绑定 Form 的ref
+  formRef?: React.MutableRefObject<ModalFormRef>;
+  //触发弹窗的内容
   trigger?: React.ReactNode;
-  /**
-   * Modal的属性
-   */
+  //Modal 的属性
   modalProps?: ModalProps;
-  /**
-   * 表单内容
-   */
+  //Modal 的属性
+  onFinish?: (e: any, idx: number) => void;
+  //表单内容
   children: React.ReactNode;
 };
 
-const ModalForm = ({
-  trigger,
-  children,
-  modalProps,
-  ...formProps
-}: ModalFormProps & FormProps) => {
-  const [form] = Form.useForm();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [confirmLoading, setConfirmLoading] = useState(false);
+const ModalForm = forwardRef(
+  ({
+    formRef,
+    trigger,
+    children,
+    modalProps,
+    onFinish,
+    ...formProps
+  }: ModalFormProps & FormProps) => {
+    const [form] = Form.useForm();
+    const ref = useRef(form);
+    const [modalController, setModalController] = useState({
+      open: false,
+      loading: false,
+      idx: 0,
+    });
+    const { open, loading, idx } = modalController;
 
-  const handleCancel = (
-    e: React.MouseEvent<HTMLElement, MouseEvent>,
-    onCancel?: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void,
-  ) => {
-    e.preventDefault();
-    if (onCancel) {
-      onCancel(e);
-    }
-    setIsModalOpen(false);
-    (formProps.form || form).resetFields();
-  };
+    useImperativeHandle(
+      formRef,
+      () => {
+        return {
+          ...form,
+          setController({ ...rest }) {
+            setModalController((m) => {
+              return { ...m, ...rest };
+            });
+          },
+        };
+      },
+      [ref.current],
+    );
 
-  return (
-    <>
-      {trigger && <div onClick={() => setIsModalOpen(true)}>{trigger}</div>}
-      <Modal
-        title="Basic Modal"
-        confirmLoading={confirmLoading}
-        open={isModalOpen}
-        {...modalProps}
-        cancelButtonProps={{
-          disabled: modalProps?.confirmLoading || confirmLoading,
-          ...modalProps?.cancelButtonProps,
-        }}
-        onOk={() => {
-          setConfirmLoading(true);
-          (formProps.form || form).submit();
-        }}
-        onCancel={(e) => handleCancel(e, modalProps?.onCancel)}
-      >
-        <Form
-          form={form}
-          {...formProps}
-          onFinish={async (e) => {
-            if (formProps?.onFinish) {
-              await formProps?.onFinish(e);
+    return (
+      <>
+        {trigger && (
+          <div
+            onClick={() =>
+              setModalController({ ...modalController, open: true })
             }
-            setIsModalOpen(false);
-            setConfirmLoading(false);
-            (formProps.form || form).resetFields();
+          >
+            {trigger}
+          </div>
+        )}
+        <Modal
+          title="Basic Modal"
+          {...modalProps}
+          confirmLoading={loading}
+          open={open}
+          cancelButtonProps={{
+            disabled: loading,
+            ...modalProps?.cancelButtonProps,
+          }}
+          onOk={() => {
+            setModalController({ ...modalController, loading: true });
+            form.submit();
+          }}
+          onCancel={() => {
+            setModalController({ ...modalController, open: false });
+            form.resetFields();
           }}
         >
-          {children}
-        </Form>
-      </Modal>
-    </>
-  );
-};
+          <Form
+            {...formProps}
+            form={form}
+            ref={ref}
+            onFinish={async (e) => {
+              if (onFinish) {
+                await onFinish(e, idx);
+              }
+              setModalController({
+                ...modalController,
+                loading: false,
+                open: false,
+              });
+              form.resetFields();
+            }}
+          >
+            {children}
+          </Form>
+        </Modal>
+      </>
+    );
+  },
+);
 
 export default ModalForm;

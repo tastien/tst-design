@@ -19,6 +19,7 @@ const App: React.FC = () => {
         console.log('onFinish');
       }}
       modalProps={{
+        title: 'footerTypeModalForm',
         okButtonProps: {
           style: {
             backgroundColor: 'skyblue',
@@ -32,9 +33,6 @@ const App: React.FC = () => {
           },
         },
         okText: '提交',
-        onCancel() {
-          console.log('onCancel');
-        },
       }}
     >
       <Form.Item name="name" label="label">
