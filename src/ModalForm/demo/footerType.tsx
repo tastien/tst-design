@@ -14,9 +14,9 @@ const App: React.FC = () => {
   return (
     <ModalForm
       trigger={<Button type="primary">自定义按钮样式</Button>}
-      onFinish={async () => {
+      onFinish={async (value) => {
         await someAsyncFunction();
-        console.log('onFinish');
+        console.log(value, 'onFinish');
       }}
       modalProps={{
         title: 'footerTypeModalForm',

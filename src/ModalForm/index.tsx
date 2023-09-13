@@ -6,113 +6,98 @@ import React, {
   useState,
 } from 'react';
 
-type setControllerProps = {
-  open?: boolean;
-  loading?: boolean;
-  idx?: number;
-};
-
-export type ModalFormRef<T = any> = FormInstance<T> & {
-  setController: (props: setControllerProps) => T;
-};
-
-type ModalFormProps = {
-  //绑定 Form 的ref
-  formRef?: React.MutableRefObject<ModalFormRef>;
+interface ModalFormProps<T> extends FormProps {
   //触发弹窗的内容
   trigger?: React.ReactNode;
+  //表单提交时触发的方法
+  onFinish?: (value: T) => void;
   //Modal 的属性
   modalProps?: ModalProps;
-  //Modal 的属性
-  onFinish?: (e: any, idx: number) => void;
   //表单内容
-  children: React.ReactNode;
-};
+  children?: React.ReactNode;
+}
 
-const ModalForm = forwardRef(
-  ({
-    formRef,
+export interface IFormRef<T> extends FormInstance<FormInstance<any>> {
+  openModal: (value?: T) => void;
+  closeModal: () => void;
+}
+
+function ModalForm<T extends Record<string, any>>(
+  {
     trigger,
+    onFinish,
     children,
     modalProps,
-    onFinish,
     ...formProps
-  }: ModalFormProps & FormProps) => {
-    const [form] = Form.useForm();
-    const ref = useRef(form);
-    const [modalController, setModalController] = useState({
-      open: false,
-      loading: false,
-      idx: 0,
-    });
-    const { open, loading, idx } = modalController;
+  }: FormProps & ModalFormProps<T>,
+  ref: React.Ref<IFormRef<T>>,
+) {
+  const [form] = Form.useForm<FormInstance<any>>();
+  const formRef = useRef(form);
+  const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [defaultValue, setDefaultValue] = useState({});
 
-    useImperativeHandle(
-      formRef,
-      () => {
-        return {
-          ...form,
-          setController({ ...rest }) {
-            setModalController((m) => {
-              return { ...m, ...rest };
-            });
-          },
-        };
+  useImperativeHandle(ref, () => {
+    return {
+      ...form,
+      openModal(value) {
+        if (value) {
+          form.setFieldsValue(value);
+          setDefaultValue(value);
+        }
+        setOpen(true);
       },
-      [ref.current],
-    );
+      closeModal() {
+        setOpen(false);
+        setDefaultValue({});
+      },
+    };
+  });
 
-    return (
-      <>
-        {trigger && (
-          <div
-            onClick={() =>
-              setModalController({ ...modalController, open: true })
+  return (
+    <>
+      {trigger && <div onClick={() => setOpen(true)}>{trigger}</div>}
+      <Modal
+        title="Basic Modal"
+        {...modalProps}
+        confirmLoading={loading}
+        open={open}
+        cancelButtonProps={{
+          disabled: loading,
+          ...modalProps?.cancelButtonProps,
+        }}
+        onOk={() => {
+          setLoading(true);
+          form.submit();
+        }}
+        onCancel={() => {
+          setOpen(false);
+          setDefaultValue({});
+          form.resetFields();
+        }}
+      >
+        <Form
+          {...formProps}
+          form={form}
+          ref={formRef}
+          onFinish={async (value) => {
+            if (onFinish) {
+              await onFinish({ ...defaultValue, ...value } as unknown as T);
             }
-          >
-            {trigger}
-          </div>
-        )}
-        <Modal
-          title="Basic Modal"
-          {...modalProps}
-          confirmLoading={loading}
-          open={open}
-          cancelButtonProps={{
-            disabled: loading,
-            ...modalProps?.cancelButtonProps,
-          }}
-          onOk={() => {
-            setModalController({ ...modalController, loading: true });
-            form.submit();
-          }}
-          onCancel={() => {
-            setModalController({ ...modalController, open: false });
+            setLoading(false);
+            setOpen(false);
+            setDefaultValue({});
             form.resetFields();
           }}
         >
-          <Form
-            {...formProps}
-            form={form}
-            ref={ref}
-            onFinish={async (e) => {
-              if (onFinish) {
-                await onFinish(e, idx);
-              }
-              setModalController({
-                ...modalController,
-                loading: false,
-                open: false,
-              });
-              form.resetFields();
-            }}
-          >
-            {children}
-          </Form>
-        </Modal>
-      </>
-    );
-  },
-);
+          {children}
+        </Form>
+      </Modal>
+    </>
+  );
+}
 
-export default ModalForm;
+export default forwardRef(ModalForm) as <T extends Record<string, any>>(
+  props: ModalFormProps<T> & React.RefAttributes<IFormRef<T>>,
+) => React.ReactElement;

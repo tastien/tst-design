@@ -1,15 +1,23 @@
 import { ModalForm } from '@tastien/tstd';
 import { Form, Input, Table } from 'antd';
 import React, { useRef, useState } from 'react';
-import { ModalFormRef } from '..';
+import { IFormRef } from '..';
+
+type DataType = {
+  name: string;
+  age: number;
+  id: number;
+};
 
 const App: React.FC = () => {
-  const [data, setData] = useState<{ name: string; age: number }[]>([
-    { name: '小明', age: 11 },
-    { name: '小红', age: 12 },
-    { name: '小军', age: 13 },
-  ]);
-  const formRef = useRef<ModalFormRef>();
+  const formRef = useRef<IFormRef<DataType>>(null);
+  const [data, setData] = useState<{ name: string; age: number; id: number }[]>(
+    [
+      { name: '小明', age: 11, id: 1 },
+      { name: '小红', age: 12, id: 2 },
+      { name: '小军', age: 13, id: 3 },
+    ],
+  );
 
   const someAsyncFunction = () => {
     return new Promise((resolve) => {
@@ -36,15 +44,11 @@ const App: React.FC = () => {
           {
             title: '操作',
             width: 90,
-            render(_, record, idx) {
+            render(_, record) {
               return (
                 <a
                   onClick={() => {
-                    formRef.current?.setFieldsValue({
-                      name: record.name,
-                      age: record.age,
-                    });
-                    formRef.current?.setController({ open: true, idx });
+                    formRef.current?.openModal(record);
                   }}
                 >
                   编辑
@@ -55,13 +59,14 @@ const App: React.FC = () => {
         ]}
         dataSource={data}
       />
-      <ModalForm
-        formRef={formRef}
-        onFinish={async (e, idx: number) => {
+      <ModalForm<DataType>
+        ref={formRef}
+        onFinish={async (value) => {
           await someAsyncFunction();
-          data[idx] = e;
+          const index = data.findIndex((i) => i.id === value.id);
+          data[index] = value;
           setData([...data]);
-          console.log(e, 'onFinish');
+          console.log(value, 'onFinish');
         }}
         modalProps={{
           title: 'ModalForm',

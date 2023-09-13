@@ -1,11 +1,15 @@
 import { ModalForm } from '@tastien/tstd';
 import { Button, Form, Input } from 'antd';
 import React, { useRef, useState } from 'react';
-import { ModalFormRef } from '..';
+import { IFormRef } from '..';
+
+type DataType = {
+  name: string;
+};
 
 const App: React.FC = () => {
   const [loading, setLoading] = useState(false);
-  const formRef = useRef<ModalFormRef>();
+  const formRef = useRef<IFormRef<DataType>>(null);
 
   const someAsyncFunction = () => {
     return new Promise((resolve) => {
@@ -22,22 +26,22 @@ const App: React.FC = () => {
   };
 
   return (
-    <ModalForm
-      formRef={formRef}
+    <ModalForm<DataType>
+      ref={formRef}
       trigger={
         <Button
           type="primary"
           onClick={() => {
-            formRef.current?.setController({ open: true });
+            formRef.current?.openModal();
           }}
         >
           自定义 footer
         </Button>
       }
-      onFinish={async (e) => {
+      onFinish={async (value) => {
         await someAsyncFunction();
-        console.log(e, 'onFinish');
-        formRef.current?.setController({ open: false });
+        console.log(value, 'onFinish');
+        formRef.current?.closeModal();
         setLoading(false);
       }}
       modalProps={{
@@ -46,7 +50,7 @@ const App: React.FC = () => {
           <Button
             key="cancel"
             onClick={() => {
-              formRef.current?.setController({ open: false });
+              formRef.current?.closeModal();
               formRef.current?.resetFields();
             }}
             disabled={loading}

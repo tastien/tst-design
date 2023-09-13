@@ -1,10 +1,13 @@
 import { ModalForm } from '@tastien/tstd';
 import { Button, Form, Input } from 'antd';
 import React, { useRef } from 'react';
-import { ModalFormRef } from '..';
+
+type DataType = {
+  name: string;
+};
 
 const App: React.FC = () => {
-  const formRef = useRef<ModalFormRef>();
+  const formRef = useRef(null);
 
   const someAsyncFunction = () => {
     return new Promise((resolve) => {
@@ -15,12 +18,12 @@ const App: React.FC = () => {
   };
 
   return (
-    <ModalForm
+    <ModalForm<DataType>
       trigger={<Button type="primary">ModalForm</Button>}
-      formFef={formRef}
-      onFinish={async (e) => {
+      ref={formRef}
+      onFinish={async (value) => {
         await someAsyncFunction();
-        console.log(e, 'onFinish');
+        console.log(value, 'onFinish');
       }}
       modalProps={{
         title: 'baseModalForm',
