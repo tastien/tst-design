@@ -19,6 +19,7 @@ export { default as ExportButton } from './ExportButton';
 export { default as ImportExcelModal } from './ImportExcelModal';
 export { default as InputLevel } from './InputLevel';
 export { default as LocationSelect } from './LocationSelect';
+export { default as ModalForm } from './ModalForm';
 export { default as MultipleOptionItem } from './MultipleOptionItem';
 export { default as PickerColor } from './PickerColor';
 export type {
