@@ -30,6 +30,7 @@ const App: React.FC = () => {
   return (
     <div>
       <Table
+        rowKey="id"
         columns={[
           {
             title: '名字',
