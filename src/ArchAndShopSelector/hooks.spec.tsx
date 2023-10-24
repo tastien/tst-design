@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks';
+import { act, renderHook } from '@testing-library/react';
 import { useArchAndShop, useArchAndShopSingle, useDoubleValue } from './hooks';
 import { makeArch, makeShops } from './mock';
 import { ArchNode } from './types';

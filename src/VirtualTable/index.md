@@ -10,16 +10,22 @@ toc: content
 
 ## 基本用法
 
-<code src="./demo/EasyTable.tsx"></code>
+<code src="./demo/easyTable.tsx"></code>
 
-## 分页用法
+## 分页表格
 
-<code src="./demo/PaginationTable.tsx"></code>
+<code src="./demo/paginationTable.tsx"></code>
 
-## 树形表格用法
+## 滚动到指定行
 
-<code src="./demo/TreeTable.tsx"></code>
+<code src="./demo/scrollTo.tsx"></code>
 
-## 拖拽表格用法
+## API
 
-<code src="./demo/DraggableTable.tsx"></code>
+| 参数                   | 说明                                                                          | 类型                                                     | 默认值 |
+| ---------------------- | ----------------------------------------------------------------------------- | -------------------------------------------------------- | ------ |
+| height                 | 文本的类型                                                                    | `number` \| `string`                                     | -      |
+| reachEnd               | 到达底部时触发的函数                                                          | () => void                                               | -      |
+| onScroll               | 滚动时触发的函数                                                              | () => void                                               | -      |
+| onListRender           | 列表渲染时触发的回调函数，参数可以拿到 start: 渲染开始行, renderLen: 渲染行数 | (listInfo: { start: number; renderLen: number }) => void | -      |
+| resetTopWhenDataChange | 重置 scrollTop 当数据变更的时候                                               | boolean                                                  | -      |
