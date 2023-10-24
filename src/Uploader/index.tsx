@@ -221,9 +221,7 @@ const Uploader = ({
         ],
       });
       setFileList(newList);
-      const list: string[] = _.compact(
-        newList.map((file: { url: string }) => file.url),
-      );
+      const list: string[] = _.compact(newList.map((file) => file.url));
       if (onChange) {
         onChange(isSingle ? list[0] : list);
       }

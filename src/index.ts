@@ -34,3 +34,4 @@ export { default as Text } from './Text';
 export { default as TimeInterval } from './TimeInterval';
 export { default as Uploader } from './Uploader';
 export { default as FileUpload } from './Uploader/FileUpload';
+export { default as VirtualTable } from './VirtualTable';
