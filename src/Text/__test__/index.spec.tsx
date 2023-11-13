@@ -21,8 +21,8 @@ describe('>>> component Text', () => {
   });
 
   it('when with type is grey show correctly', () => {
-    const { queryByText } = render(<Text>grey text</Text>);
-    const element = queryByText('primary text');
+    const { queryByText } = render(<Text type="grey">grey text</Text>);
+    const element = queryByText('grey text');
     expect(element?.classList.contains('tst-text-grey')).toBeTruthy();
   });
 

@@ -31,7 +31,7 @@ const Text = ({
 
   return (
     <span
-      title={ellipsisWidth && children}
+      title={ellipsisWidth ? children?.toString() : ''}
       className={cls}
       style={{
         ...style,
