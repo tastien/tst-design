@@ -2,7 +2,7 @@ import { VirtualTable } from '@tastien/tstd';
 import React from 'react';
 import { ceasyTableColumns, easyTableData } from './const';
 
-function EasyTable() {
+const App: React.FC = () => {
   return (
     <VirtualTable
       height={550}
@@ -13,6 +13,6 @@ function EasyTable() {
       rowKey="key"
     />
   );
-}
+};
 
-export default EasyTable;
+export default App;

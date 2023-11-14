@@ -3,7 +3,7 @@ import { Button } from 'antd';
 import React from 'react';
 import { ceasyTableColumns, getData } from './const';
 
-function JumpTable() {
+const App: React.FC = () => {
   const tblRef: Parameters<typeof VirtualTable>[0]['ref'] = React.useRef(null);
 
   return (
@@ -25,6 +25,6 @@ function JumpTable() {
       />
     </>
   );
-}
+};
 
-export default JumpTable;
+export default App;
