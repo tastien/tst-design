@@ -7,7 +7,6 @@ interface InitialState {
   totalLen: number;
 }
 
-// =============== reducer ============== //
 export const initialState: InitialState = {
   // 行高度
   rowHeight: 0,
@@ -56,13 +55,11 @@ export function reducer(state: InitialState, action: any) {
   }
 }
 
-// =============== context ============== //
 export const ScrollContext = createContext({
   dispatch: undefined,
   renderLen: 1,
   start: 0,
   offsetStart: 0,
-  // =============
   rowHeight: initialState.rowHeight,
   totalLen: 0,
   vid: DEFAULT_VID,
