@@ -10,11 +10,11 @@ toc: content
 
 ## 基本用法
 
-<code src="./demo/easyTable.tsx"></code>
+<code src="./demo/EasyTable.tsx"></code>
 
 ## 分页表格
 
-<code src="./demo/paginationTable.tsx"></code>
+<code src="./demo/PaginationTable.tsx"></code>
 
 ## 滚动到指定行
 
