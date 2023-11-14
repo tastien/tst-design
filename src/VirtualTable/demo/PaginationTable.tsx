@@ -2,7 +2,7 @@ import { VirtualTable } from '@tastien/tstd';
 import React from 'react';
 import { ceasyTableColumns, easyTableData, pagination } from './const';
 
-function PaginationTable() {
+const App: React.FC = () => {
   return (
     <VirtualTable
       height={600}
@@ -13,6 +13,6 @@ function PaginationTable() {
       rowKey="key"
     />
   );
-}
+};
 
-export default PaginationTable;
+export default App;
