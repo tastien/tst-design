@@ -5,6 +5,15 @@
 
 import type { Config } from 'jest';
 
+/** 忽略格式转换的包名列表 */
+const ignorePackageNames = [
+  'dnd-core',
+  '@react-dnd',
+  'react-dnd',
+  'react-dnd-html5-backend',
+  'array-move',
+];
+
 const config: Config = {
   clearMocks: true,
   collectCoverage: true,
@@ -22,6 +31,9 @@ const config: Config = {
     //
     '^.+\\.(css|less)$': 'identity-obj-proxy', // 使用 identity-obj-proxy mock CSS Modules
   },
+  transformIgnorePatterns: [
+    `node_modules/(?!(${ignorePackageNames.join('|')}))`,
+  ],
 };
 
 export default config;

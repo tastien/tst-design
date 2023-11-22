@@ -15,6 +15,7 @@ export type {
 export { default as AvailableTime } from './AvailableTime';
 export { default as DatePicker } from './DatePicker/index';
 export { default as DateSelectFilter } from './DateSelectFilter';
+export { default as EditableVirtualTable } from './EditableVirtualTable';
 export { default as ExportButton } from './ExportButton';
 export { default as ImportExcelModal } from './ImportExcelModal';
 export { default as InputLevel } from './InputLevel';
