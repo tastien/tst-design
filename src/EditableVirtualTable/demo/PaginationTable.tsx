@@ -20,14 +20,14 @@ export default () => {
       width: 200,
       render: (
         _text: any,
-        record: { id: React.Key },
+        record: { key: React.Key },
         _: any,
         action: { startEditable: (arg0: any) => void },
       ) => [
         <a
           key="editable"
           onClick={() => {
-            action?.startEditable?.(record.id);
+            action?.startEditable?.(record.key);
           }}
         >
           编辑
@@ -35,7 +35,7 @@ export default () => {
         <a
           key="delete"
           onClick={() => {
-            setDataSource(dataSource.filter((item) => item.id !== record.id));
+            setDataSource(dataSource.filter((item) => item.key !== record.key));
           }}
         >
           删除
@@ -45,15 +45,14 @@ export default () => {
   ];
 
   const request = async () => ({
-    data: getData(9999),
-    total: 9999,
+    data: getData(100),
+    total: 100,
     success: true,
   });
 
   return (
     <EditableVirtualTable
-      rowKey="id"
-      height={550}
+      rowKey="key"
       scroll={{ y: 550, x: '100%' }}
       loading={false}
       columns={defauleColumns}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 export type DataSourceType = {
-  id: React.Key;
+  key: React.Key;
   title?: string;
   readonly?: string;
   decs?: string;
@@ -26,14 +26,14 @@ export const columns: any = [
     editable: (_text: any, _record: any, index: number) => {
       return index !== 0;
     },
-    width: '150px',
+    // width: '150px',
   },
   {
     title: '活动名称二',
     dataIndex: 'readonly',
     tooltip: '只读，使用form.getFieldValue可以获取到值',
     readonly: true,
-    width: '150px',
+    // width: '150px',
   },
   {
     title: '状态',
@@ -51,7 +51,7 @@ export const columns: any = [
         status: 'Success',
       },
     },
-    width: '150px',
+    // width: '150px',
   },
   {
     title: '描述',
@@ -75,7 +75,7 @@ export const columns: any = [
     title: '活动时间',
     dataIndex: 'created_at',
     valueType: 'date',
-    width: '150px',
+    // width: '150px',
   },
 ];
 
@@ -93,7 +93,7 @@ export const pagination = {
 export const getData = (count: number) => {
   const data = new Array(count).fill(null).map((_, index) => ({
     key: index,
-    id: index,
+    // id: index,
     title: `活动名称 ${index}`,
     readonly: `活动名称 ${index}`,
     decs: '这个活动真好玩',

@@ -1,12 +1,13 @@
-import { VCellProps } from '@tastien/tstd/VirtualTable/components/VCell';
-import { VRowProps } from '@tastien/tstd/VirtualTable/components/VRow';
-import { VWrapperProps } from '@tastien/tstd/VirtualTable/components/VWrapper';
-import React, { forwardRef, useMemo, useRef } from 'react';
-import { DndProvider, useDrag, useDrop } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
-import { ItemTypes } from '../const';
+import { MenuOutlined } from '@ant-design/icons';
+import React from 'react';
+import {
+  SortableContainer,
+  SortableContainerProps,
+  SortableElement,
+  SortableHandle,
+  SortEndHandler,
+} from 'react-sortable-hoc';
 
-export type TMoveItem = { oldId: number; newId: number };
 type TSortableItem = {
   id: number;
   children: React.ReactElement[];
@@ -14,116 +15,63 @@ type TSortableItem = {
 };
 
 interface IProps {
-  virtualListComponents: {
-    table: (p: any) => JSX.Element;
-    body: {
-      wrapper: React.FC<VWrapperProps>;
-      row: React.FC<VRowProps>;
-      cell: React.FC<VCellProps>;
-    };
-  };
-  onSortEnd: (e: TMoveItem) => void;
+  Row: React.FC<any>;
+  Wrapper?: React.FC<any>;
+  dataSource?: any;
+  onSortEnd: SortEndHandler;
 }
+const DragHandle = SortableHandle(() => (
+  <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />
+));
 
-let moveItem: TMoveItem;
-const Draggable = ({ virtualListComponents, onSortEnd }: IProps) => {
-  const VRow = forwardRef(virtualListComponents.body.row as any) as any;
-  const VWrapper = virtualListComponents.body.wrapper;
-
-  const DraggableContainer = (props: VWrapperProps) => (
-    <DndProvider backend={HTML5Backend}>
-      <VWrapper {...props} />
-    </DndProvider>
+const Draggable = ({ Row, Wrapper, dataSource, onSortEnd }: IProps) => {
+  const SortableItem = SortableElement(
+    ({ children, ...props }: TSortableItem) => {
+      return (
+        <Row {...props}>
+          {React.Children.map(children, (child) => {
+            if ((child as React.ReactElement).key === 'sort') {
+              return React.cloneElement(child as React.ReactElement, {
+                children: <DragHandle />,
+              });
+            }
+            return child;
+          })}
+        </Row>
+      );
+    },
   );
 
-  const SortableItem = (props: TSortableItem) => {
-    const dragRef = useRef(null);
-    const previewRef = useRef(null);
-    const { id } = props;
-    const [{ handlerId }, connectDrag, preview] = useDrag(
-      {
-        type: ItemTypes.CARD,
-        item: { id: id },
-        end: () => {
-          if (onSortEnd) onSortEnd(moveItem);
-        },
-        collect: (monitor) => {
-          const result = {
-            handlerId: monitor.getHandlerId(),
-          };
-          return result;
-        },
-      },
-      [],
+  const SortableBody = SortableContainer(
+    (props: React.HTMLAttributes<HTMLTableSectionElement>) =>
+      Wrapper ? <Wrapper {...props} /> : <tbody {...props} />,
+  );
+
+  const DraggableContainer = (props: SortableContainerProps) => (
+    <SortableBody
+      useDragHandle
+      disableAutoscroll
+      helperClass="row-dragging"
+      onSortEnd={onSortEnd}
+      {...props}
+    />
+  );
+
+  const DraggableBodyRow: React.FC<any> = ({ ...restProps }) => {
+    const index = dataSource.findIndex(
+      (x: { key: any }) => x.key === restProps['data-row-key'],
     );
-    const [{ isOver }, connectDrop] = useDrop(
-      {
-        accept: ItemTypes.CARD,
-        hover({ id: draggedId }: { id: number }) {
-          if (draggedId !== id) {
-            moveItem = { oldId: draggedId, newId: id };
-          }
-        },
-        collect: (monitor) => {
-          const result = {
-            isOver: monitor.isOver(),
-          };
-          return result;
-        },
-      },
-      [],
+    console.log(
+      '%c [ index ]-66',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      index,
     );
-
-    const dragHandle = useMemo(() => {
-      if (!props.children?.length) {
-        return null;
-      }
-      const Dom = props.children?.find((item) => item?.key === 'sort');
-      return (
-        <td key={Dom?.key} ref={dragRef} data-handler-id={handlerId}>
-          <table>
-            <tbody>
-              <tr>{Dom}</tr>
-            </tbody>
-          </table>
-        </td>
-      );
-    }, [props]);
-
-    if (dragHandle) {
-      props.children.splice(0, 1, dragHandle);
-    }
-
-    connectDrag(dragRef);
-    connectDrop(previewRef);
-    preview(previewRef);
-
-    return (
-      <VRow
-        ref={previewRef}
-        {...props}
-        style={{
-          backgroundColor: isOver ? '#eee' : undefined,
-          ...props.style,
-        }}
-      />
+    console.log(
+      '%c [ restProps["data-row-key"] ]-67',
+      'font-size:13px; background:pink; color:#bf2c9f;',
+      restProps['data-row-key'],
     );
-  };
-
-  const DraggableBodyRow = ({
-    ...restProps
-  }: {
-    children: TSortableItem['children'];
-    style: TSortableItem['style'];
-    'data-row-key': number;
-  }) => {
-    return (
-      <SortableItem
-        key={restProps['data-row-key']}
-        id={restProps['data-row-key']}
-        {...restProps}
-      />
-    );
+    return <SortableItem index={index} {...restProps} />;
   };
 
   return { DraggableBodyRow, DraggableContainer };

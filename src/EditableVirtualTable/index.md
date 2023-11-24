@@ -24,6 +24,10 @@ toc: content
 
 <code src="./demo/DraggableTable.tsx"></code>
 
+## 可拖拽
+
+<code src="./demo/demo.tsx"></code>
+
 ## API
 
 更多 api 可参考: <a target="_blank" href="https://procomponents.ant.design/components/editable-table#api">EditableProTable</a>

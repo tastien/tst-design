@@ -39,23 +39,29 @@ export default () => {
   ];
 
   const request = async () => ({
-    data: getData(100),
-    total: 100,
+    data: getData(10000),
+    total: 10000,
     success: true,
   });
 
   return (
     <EditableVirtualTable
       rowKey="key"
-      style={{ width: '100%' }}
+      virtual
       scroll={{ y: 550, x: '100%' }}
       loading={false}
       columns={defauleColumns}
-      virtual
       recordCreatorProps={false}
       request={request}
       value={dataSource}
-      onChange={setDataSource}
+      onChange={(e) => {
+        console.log(
+          '%c [ e ]-59',
+          'font-size:13px; background:pink; color:#bf2c9f;',
+          e,
+        );
+        setDataSource(e);
+      }}
       resetTopWhenDataChange={false}
       editable={{
         type: 'multiple',
@@ -65,10 +71,6 @@ export default () => {
           await waitTime(2000);
         },
         onChange: setEditableRowKeys,
-      }}
-      draggable={true}
-      reachEnd={() => {
-        console.log('reachEnd');
       }}
     />
   );

@@ -4,18 +4,33 @@ import { arrayMoveImmutable } from 'array-move';
 import _ from 'lodash';
 import React, { useMemo } from 'react';
 
+// import { DndProvider } from 'react-dnd';
+// import { HTML5Backend } from 'react-dnd-html5-backend';
+import { SortEnd } from 'react-sortable-hoc';
 import { virtualList } from '../VirtualTable';
-import Draggable, { TMoveItem } from './component/Draggable';
-import DragHandle from './component/DragHandle';
+import Draggable from './component/Draggable';
+import DraggableRow from './component/DraggableRow';
 import './style.css';
 
 const vid = Math.random().toString();
 
-interface EditableVirtualTableProps extends EditableProTableProps<any, any> {
-  /**
-   * table 高度
-   */
-  height: number | string;
+type TVirtual =
+  | {
+      /**
+       * 虚拟列表
+       * @default false
+       */
+      virtual?: false | undefined;
+    }
+  | {
+      virtual?: true;
+      scroll: {
+        x?: string | number | true | undefined;
+        y: string | number;
+      };
+    };
+
+type TEditableVirtualTable = EditableProTableProps<any, any> & {
   /**
    * 是否可拖动
    * @default false
@@ -43,22 +58,22 @@ interface EditableVirtualTableProps extends EditableProTableProps<any, any> {
    */
   resetTopWhenDataChange?: boolean;
   vid?: string;
-}
+} & TVirtual;
 
 const EditableVirtualTable = ({
-  height,
   onScroll,
   onListRender,
   reachEnd,
   resetTopWhenDataChange,
   draggable = false,
+  virtual = false,
   ...props
-}: EditableVirtualTableProps) => {
+}: TEditableVirtualTable) => {
   const virtualListComponents = useMemo(
     () =>
       virtualList({
         vid,
-        height,
+        height: props.scroll?.y || '100%',
         onScroll,
         onListRender,
         reachEnd,
@@ -66,52 +81,74 @@ const EditableVirtualTable = ({
       }),
     [],
   );
+  const VRow = virtualListComponents.body.row;
+  const VWrapper = virtualListComponents.body.wrapper;
 
-  const onSortEnd = ({ oldId, newId }: TMoveItem): void => {
+  const onSortEnd = ({ oldIndex, newIndex }: SortEnd): void => {
     const { value = [], onChange } = props;
-    const { oldIndex, newIndex } = (() => {
-      const data: any = value;
-      const oldIndex = data.findIndex((item: any) => item.id === oldId);
-      const newIndex = data.findIndex((item: any) => item.id === newId);
-      return { oldIndex, newIndex };
-    })();
     if (oldIndex !== newIndex) {
-      const data: any = value;
       const newData = arrayMoveImmutable(
-        [].concat(data),
+        value.slice(),
         oldIndex,
         newIndex,
       ).filter((el) => !!el);
+      console.log('Sorted items: ', newData);
       if (onChange) onChange(newData);
     }
+    // const { oldIndex, newIndex } = (() => {
+    //   const data: any = value;
+    //   const oldIndex = data.findIndex((item: any) => item.id === oldId);
+    //   const newIndex = data.findIndex((item: any) => item.id === newId);
+    //   return { oldIndex, newIndex };
+    // })();
+    // if (oldIndex !== newIndex) {
+    //   const data: any = value;
+    //   const newData = arrayMoveImmutable(
+    //     [].concat(data),
+    //     oldIndex,
+    //     newIndex,
+    //   ).filter((el) => !!el);
+    //   if (onChange) onChange(newData);
+    // }
   };
 
   const { DraggableBodyRow, DraggableContainer } = Draggable({
-    virtualListComponents: virtualListComponents,
+    Row: virtual ? VRow : DraggableRow,
+    Wrapper: virtual ? VWrapper : undefined,
+    dataSource: props.value,
     onSortEnd: onSortEnd,
   });
 
-  const components = draggable
-    ? {
-        ...virtualListComponents,
-        body: {
-          ...virtualListComponents?.body,
-          wrapper: DraggableContainer,
-          row: DraggableBodyRow,
-        },
+  const components = () => {
+    if (virtual) {
+      if (draggable) {
+        return {
+          ...virtualListComponents,
+          body: {
+            ...virtualListComponents?.body,
+            row: DraggableBodyRow,
+            wrapper: DraggableContainer,
+          },
+        };
       }
-    : virtualListComponents;
+      return virtualListComponents;
+    } else {
+      if (draggable) {
+        return {
+          body: {
+            row: DraggableBodyRow,
+            wrapper: DraggableContainer,
+          },
+        };
+      }
+      return undefined;
+    }
+  };
 
   const defauleColumns = useMemo(() => {
     const columns = _.cloneDeep(props.columns) || [];
     const sortItem = {
-      title: 'Sort',
       dataIndex: 'sort',
-      width: 50,
-      className: 'drag-visible',
-      readonly: true,
-      render: () => <DragHandle />,
-      renderFormItem: () => <DragHandle />,
     };
     if (draggable) {
       return [sortItem, ...columns];
@@ -120,12 +157,14 @@ const EditableVirtualTable = ({
   }, [props.columns]);
 
   return (
+    // <DndProvider backend={HTML5Backend}>
     <EditableProTable
       {...props}
       rowClassName={() => 'editable-row'}
       columns={defauleColumns}
-      components={components}
+      components={components()}
     />
+    // </DndProvider>
   );
 };
 
