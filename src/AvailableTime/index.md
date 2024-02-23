@@ -14,6 +14,16 @@ toc: content
 
 <code src="./demo/base.tsx"></code>
 
+### 修改新增时段按钮名称
+
+<code src="./demo/addButtonName.tsx"></code>
+
+### 修改时段数量
+
+当添加 3 个时段不满足需求时使用
+
+<code src="./demo/maxCount.tsx"></code>
+
 ### 禁用
 
 <code src="./demo/disabled.tsx"></code>

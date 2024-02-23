@@ -1,8 +1,8 @@
 import { act, renderHook } from '@testing-library/react';
-import { useArchAndShop, useArchAndShopSingle, useDoubleValue } from './hooks';
-import { makeArch, makeShops } from './mock';
-import { ArchNode } from './types';
-import { getIds, getShopListFromArch } from './utils';
+import { useArchAndShop, useArchAndShopSingle, useDoubleValue } from '../hooks';
+import { makeArch, makeShops } from '../mock';
+import { ArchNode } from '../types';
+import { getIds, getShopListFromArch } from '../utils';
 
 describe('ArchAndShopSelector Hooks', () => {
   let rawData: ArchNode[];
