@@ -15,6 +15,9 @@ const App: React.FC = () => {
       form={form}
       labelCol={{ span: 8 }}
       wrapperCol={{ span: 16 }}
+      onChange={() => {
+        console.log(1);
+      }}
     >
       <AvailableTime disabled />
       <Form.Item wrapperCol={{ offset: 8, span: 16 }}>

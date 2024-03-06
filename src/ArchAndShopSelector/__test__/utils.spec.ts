@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { makeArch, makeShops } from './mock';
-import { ArchNode } from './types';
+import { makeArch, makeShops } from '../mock';
+import { ArchNode } from '../types';
 import {
   convertArchMap,
   convertShopMap,
@@ -9,7 +9,7 @@ import {
   getShopListByArchIds,
   getShopListFromArch,
   getTreeValueFromShopIds,
-} from './utils';
+} from '../utils';
 
 describe('ArchAndShopSelector utils', () => {
   let rawData: ArchNode[];

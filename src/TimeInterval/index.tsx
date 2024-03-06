@@ -34,7 +34,11 @@ const CustomTimePicker = (props: {
           onChange?.([v, end]);
         }}
       />
-      {isTomorrow && <span style={{ marginRight: 5 }}>次日</span>}
+      {isTomorrow && (
+        <span id="supportNextDay" style={{ marginRight: 5 }}>
+          次日
+        </span>
+      )}
       <TimePicker
         style={{ width: 140 }}
         value={end}
